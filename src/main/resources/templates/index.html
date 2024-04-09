@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<!-- Font Awesome 라이브러리 추가 -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<head>
+  <meta charset="UTF-8">
+  <title>아이템 가성비 계산기</title>
+  <style>
+    /* CSS 스타일링 */
+    body {
+      margin: 0; /* body 요소의 기본 마진을 없앰 */
+      padding: 0; /* body 요소의 기본 패딩을 없앰 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴을 둥근 형식으로 변경 */
+      /*background-color: #ffdab9; !* 옅은 파스텔 주황색 *!*/
+      background: linear-gradient(to left, #FFFFFF 10%, #FFDAB9 70%);
+    }
+
+    nav {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 15px 20px; /* 위아래와 좌우 padding 값을 조정 */
+      display: flex;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      margin-bottom: 5vw;
+      font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+    }
+
+    .logo a {
+      font-size: 1.5rem; /* 로고의 글자 크기를 키움 */
+      color: black;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 100px; /* 각 메뉴 사이의 간격을 늘림 */
+    }
+
+    nav ul li:first-child {
+      margin-left: 10px; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+    }
+
+    nav ul li:last-child {
+      margin-right: 30px;
+    }
+
+    nav ul li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s; /* 호버 효과를 위한 트랜지션 설정 */
+    }
+
+    nav ul li a:hover {
+      color: #FF5733; /* 호버시 글자색 변경 */
+    }
+
+    footer {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 30px 20px; /* 위아래와 좌우 padding 값을 조정 */
+      display: block;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      font-size: 1rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+      margin-top: 4vw;
+    }
+
+    .footer-text {
+      float: right;
+    }
+
+    .large-box-container-title {
+      font-size: xx-large;
+      padding: 20px 15px; /* 위아래와 좌우 padding 값을 조정 */
+      font-weight: 700;
+      display: flex;
+      margin-bottom: 4px; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
+      margin-left: 18vw; /* 왼쪽에 빈 공간을 추가 */
+      margin-right: 18vw; /* 오른쪽에 빈 공간을 추가 */
+      color: white;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 500px;
+      text-align: left;
+      border: 2px solid #FFDAB9;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 300%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #000 transparent transparent transparent;
+      white-space: pre-line; /* 텍스트의 줄 바꿈 허용 */
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .large-box-container {
+      display: flex;
+      justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
+      /* 좌우 여백을 조절 */
+      flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
+      /* 왼쪽에 빈 공간을 추가 */
+      /* 오른쪽에 빈 공간을 추가 */
+      margin: 0 18vw;
+    }
+
+    .large-box-1 {
+      width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
+      overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
+      margin-bottom: 20px; /* 각 큰 상자 사이의 간격을 추가 */
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
+      border-radius: 10px;
+      background-color: #ffffff;
+      border: none;
+      padding: 10px 1px 10px 10px;
+    }
+
+    .large-box-2 {
+      width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
+      overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
+      padding: 10px 1px 10px 10px;
+      margin-bottom: 20px; /* 각 큰 상자 사이의 간격을 추가 */
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
+      border-radius: 10px;
+      background-color: #FFDAB9;
+      border: none;
+    }
+
+    .small-box-container-title-1 {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-weight: 600;
+      background: linear-gradient(to left, #FFFFFF 30%, #FFDAB9 100%);
+      border-radius: 10px;
+      color: #FF5733;
+    }
+
+    .small-box-container-title-2 {
+      padding: 10px 20px;
+      font-weight: 600;
+      background: linear-gradient(to left, #ffffff 30%, #FFDAB9 100%);
+      border-radius: 10px;
+      color: #FF5733;
+      text-align: right;
+      margin-right: 17px;
+    }
+
+    .small-box-container {
+      display: flex;
+      flex-wrap: wrap; /* 작은 상자를 한 줄에 넘치면 다음 줄로 넘어가도록 설정 */
+      gap: 10px; /* 작은 상자 사이의 간격을 설정 */
+      padding: 10px; /* 작은 상자들 사이의 간격을 조절 */
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+    }
+
+    .small-box {
+      width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
+      border: 2px solid #FFDAB9;
+      padding: 10px;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .small-box h4 {
+      text-align: center;
+    }
+
+    .small-box div {
+      margin-bottom: 14px;
+    }
+
+    .small-box-2 {
+      width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
+      border: 2px solid #ffffff;
+      padding: 10px;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .small-box-2 h4 {
+      text-align: center;
+    }
+
+    .small-box-2 div {
+      margin-bottom: 14px;
+    }
+
+    .input-container {
+      margin-bottom: 5px; /* 각 입력 필드 사이의 간격을 추가 */
+      display: flex;
+      align-items: center; /* 입력 필드를 수직으로 중앙에 정렬 */
+      width: 100%; /* 입력 상자의 너비를 100%로 설정하여 부모 컨테이너에 맞춤 */
+    }
+
+    .input-container label {
+      margin-right: 10px;
+      font-size: medium; /* 제목의 크기를 줄임 */
+      width: 150px;
+    }
+
+    .input-container input {
+      flex: 1;
+      width: 100%; /* 입력 상자의 너비를 100%로 설정하여 부모 컨테이너에 맞춤 */
+      text-align: right;
+      border-radius: 5px; /* 테두리를 둥글게 설정 */
+      border: 1px solid #ccc; /* 테두리 추가 */
+      padding: 6px; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+    }
+
+    .submit-button {
+      position: absolute; /* 제출 버튼의 위치 설정 */
+      bottom: 30px; /* 아래에서 10px 떨어진 위치에 배치 */
+      right: 30px; /* 오른쪽에서 10px 떨어진 위치에 배치 */
+      font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
+      padding: 25px; /* 버튼 내부의 여백 설정 */
+      border-radius: 8px;
+      border: none; /* 테두리 없애기 */
+      background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
+      color: white; /* 글자색을 흰색으로 설정 */
+      cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
+    }
+
+    .submit-button:hover {
+      background-color: #ff7f50; /* 호버시 배경색을 더 진한 주황색으로 변경 */
+    }
+
+    .submit-button-2 {
+      position: absolute; /* 제출 버튼의 위치 설정 */
+      bottom: 30px; /* 아래에서 10px 떨어진 위치에 배치 */
+      right: 30px; /* 오른쪽에서 10px 떨어진 위치에 배치 */
+      font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
+      padding: 25px; /* 버튼 내부의 여백 설정 */
+      border-radius: 8px;
+      border: none; /* 테두리 없애기 */
+      background-color: white; /* 파스텔 계열의 옅은 주황색 */
+      color: #ffa07a; /* 글자색을 흰색으로 설정 */
+      cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
+    }
+
+    .submit-button-2:hover {
+      background-color: floralwhite; /* 호버시 배경색을 더 진한 주황색으로 변경 */
+    }
+
+    .result {
+      padding: 5px;
+      margin-left: 10px;
+      margin-top: 20px; /* 결과값과의 간격을 추가 */
+    }
+
+    .result div {
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    @media screen and (max-width: 600px) {
+      /* 화면의 너비가 600px 이하일 때 적용되는 스타일 */
+      .large-box {
+        width: 100%; /* 페이지의 전체 너비를 차지하도록 크기 조정 */
+      }
+
+      .small-box {
+        width: calc(100% - 20px); /* 작은 상자를 한 줄에 표시하도록 너비 조정 */
+      }
+
+      nav {
+        margin-bottom: 10px; /* 작은 화면에서 네비게이션 바와 다음 요소 사이의 간격을 줄임 */
+        justify-content: center; /* 네비게이션 바를 가운데 정렬 */
+        margin-left: 0; /* 왼쪽 빈 공간 제거 */
+        margin-right: 0; /* 오른쪽 빈 공간 제거 */
+      }
+
+      .large-box-container {
+        margin: 0; /* 좌우 여백 제거 */
+      }
+
+      .input-container {
+        width: auto; /* 입력 상자의 너비를 자동으로 조정 */
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- 위쪽 네비게이션 바 -->
+<nav>
+  <ul>
+    <li class="logo"><a href="#">🍁 Maple 아이템 가성비 계산기</a></li>
+  </ul>
+  <ul>
+    <li><a href="#"> 방어구 </a></li> <!-- 메뉴1 추가 -->
+    <li><a href="#"> 무기류 </a></li> <!-- 메뉴1 추가 -->
+  </ul>
+</nav>
+
+<div class="large-box-container-title">
+  방어구 비교하기
+  <div class="tooltip">&nbsp;
+    <i class="fas fa-question-circle"></i>
+    <span class="tooltip-text">
+      우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다. <br/><br/>
+      아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. <br/><br/>
+      그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
+      메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다.<br/><br/>
+      추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
+      감사합니다.
+    </span>
+  </div>
+</div>
+<!-- 상자들을 포함하는 컨테이너 -->
+<div class="large-box-container">
+  <!-- 첫 번째 큰 직사각형 상자 -->
+  <div class="large-box-1">
+    <div class="small-box-container-title-1">기존 장비 [장비 A]</div>
+    <div class="small-box-container">
+      <!-- 첫번 째 작은 사각형 상자 -->
+      <div class="small-box">
+        <!-- 입력 상자 -->
+        <h4>장비 옵션 (기본,작,추옵,스타포스 포함)</h4>
+        <div class="input-container">
+          <label for="title1">주스탯 : </label>
+          <input type="text" id="title1" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title2">부스탯 : </label>
+          <input type="text" id="title2" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title3">공격력/마력 : </label>
+          <input type="text" id="title3" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title4">올스탯 % : </label>
+          <input type="text" id="title4" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 두 번째 작은 상자 -->
+      <div class="small-box">
+        <!-- 입력 상자 -->
+        <h4>빠지는 세트 옵션</h4>
+        <div class="input-container">
+          <label for="title18">주스탯 : </label>
+          <input type="text" id="title18" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title19">부스탯 : </label>
+          <input type="text" id="title19" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title20">공격력 / 마력 : </label>
+          <input type="text" id="title20" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title21">보스 공격력 % : </label>
+          <input type="text" id="title21" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title22">크리티컬 데미지 % : </label>
+          <input type="text" id="title22" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 세 번째 작은 상자 -->
+      <div class="small-box">
+        <!-- 입력 상자 -->
+        <h4>잠재능력</h4>
+        <div class="input-container">
+          <label for="title5">주스탯 % : </label>
+          <input type="text" id="title5" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title6">부스탯 % : </label>
+          <input type="text" id="title6" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title7">올스탯 % : </label>
+          <input type="text" id="title7" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title8">주스탯 : </label>
+          <input type="text" id="title8" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title9">부스탯 : </label>
+          <input type="text" id="title9" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title10">크리티컬 데미지 % : </label>
+          <input type="text" id="title10" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 네 번째 작은 상자 -->
+      <div class="small-box">
+        <!-- 입력 상자 -->
+        <h4>에디셔널 잠재능력</h4>
+        <div class="input-container">
+          <label for="title11">주스탯 % : </label>
+          <input type="text" id="title11" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title12">부스탯 % : </label>
+          <input type="text" id="title12" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title13">올스탯 % : </label>
+          <input type="text" id="title13" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title14">주스탯 : </label>
+          <input type="text" id="title14" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title15">부스탯 : </label>
+          <input type="text" id="title15" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title16">공격력 / 마력 : </label>
+          <input type="text" id="title16" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title17">크리티컬 데미지 % : </label>
+          <input type="text" id="title17" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 다섯 번째 작은 상자 -->
+      <div class="small-box">
+        <!-- 입력 상자 -->
+        <div class="input-container">
+          <label for="title23">구매가격:</label>
+          <input type="text" id="title23" value="0" min="0" max="999999999999">
+        </div>
+        <!-- 다른 입력 상자들도 추가할 수 있음 -->
+      </div>
+    </div>
+
+    <button class="submit-button" onclick="calculateTotal(1,
+    'title1','title8','title14','title18',
+    'title2','title9','title15','title19',
+    'title5','title11','title6','title12',
+    'title4','title7','title13','title3','title16','title20',
+    'title10','title17','title22','title21','title23'
+    )">계산하기
+    </button>
+    <!-- 결과값을 나타내는 라인 -->
+    <div class="result">
+      <div>총 주스탯 효율 : <span id="total-stats-1">약 [0] %</span></div>
+      <div>주스탯 % 당 가격 : <span id="price-percentage-1">약 [0]억 메소</span></div>
+      <div>억당 주스탯 효율 % : <span id="efficient-price-1">약 [0] %</span></div>
+    </div>
+  </div>
+
+  <!-- 두 번째 큰 직사각형 상자 -->
+  <div class="large-box-2">
+    <div class="small-box-container-title-2">구매할 장비 [장비 B]</div>
+    <div class="small-box-container">
+      <!-- 첫번 째 작은 사각형 상자 -->
+      <div class="small-box-2">
+        <!-- 입력 상자 -->
+        <h4>장비 옵션 (기본,작,추옵,스타포스 포함)</h4>
+        <div class="input-container">
+          <label for="title24">주스탯 : </label>
+          <input type="text" id="title24" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title25">부스탯 : </label>
+          <input type="text" id="title25" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title26">공격력/마력 : </label>
+          <input type="text" id="title26" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title27">올스탯 % : </label>
+          <input type="text" id="title27" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 두 번째 작은 상자 -->
+      <div class="small-box-2">
+        <!-- 입력 상자 -->
+        <h4>추가되는 세트는옵션</h4>
+        <div class="input-container">
+          <label for="title41">주스탯 : </label>
+          <input type="text" id="title41" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title42">부스탯 : </label>
+          <input type="text" id="title42" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title43">공격력 / 마력 : </label>
+          <input type="text" id="title43" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title44">보스 공격력 % : </label>
+          <input type="text" id="title44" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title45">크리티컬 데미지 % : </label>
+          <input type="text" id="title45" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 세 번째 작은 상자 -->
+      <div class="small-box-2">
+        <!-- 입력 상자 -->
+        <h4>잠재능력</h4>
+        <div class="input-container">
+          <label for="title28">주스탯 % : </label>
+          <input type="text" id="title28" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title29">부스탯 % : </label>
+          <input type="text" id="title29" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title30">올스탯 % : </label>
+          <input type="text" id="title30" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title31">주스탯 : </label>
+          <input type="text" id="title31" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title32">부스탯 : </label>
+          <input type="text" id="title32" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title33">크리티컬 데미지 % : </label>
+          <input type="text" id="title33" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 네 번째 작은 상자 -->
+      <div class="small-box-2">
+        <!-- 입력 상자 -->
+        <h4>에디셔널 잠재능력</h4>
+        <div class="input-container">
+          <label for="title34">주스탯 % : </label>
+          <input type="text" id="title34" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title35">부스탯 % : </label>
+          <input type="text" id="title35" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title36">올스탯 % : </label>
+          <input type="text" id="title36" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title37">주스탯 : </label>
+          <input type="text" id="title37" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title38">부스탯 : </label>
+          <input type="text" id="title38" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title39">공격력 / 마력 : </label>
+          <input type="text" id="title39" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title40">크리티컬 데미지 % : </label>
+          <input type="text" id="title40" value="0" min="0" max="9999">
+        </div>
+      </div>
+
+      <!-- 다섯 번째 작은 상자 -->
+      <div class="small-box-2">
+        <!-- 입력 상자 -->
+        <div class="input-container">
+          <label for="title46">구매가격:</label>
+          <input type="text" id="title46" value="0" min="0" max="999999999999">
+        </div>
+        <!-- 다른 입력 상자들도 추가할 수 있음 -->
+      </div>
+    </div>
+
+    <button class="submit-button-2" onclick="calculateTotal(2,
+    'title24','title28','title37','title41',
+    'title25','title32','title38','title42',
+    'title28','title34','title29','title35',
+    'title27','title30','title36','title26','title39','title43',
+    'title33','title40','title45','title44','title46'
+    )">계산하기
+    </button>
+    <!-- 결과값을 나타내는 라인 -->
+    <div class="result">
+      <div>총 주스탯 효율 : <span id="total-stats-2">약 [0] %</span></div>
+      <div>주스탯 % 당 가격 : <span id="price-percentage-2">약 [0]억 메소</span></div>
+      <div>억당 주스탯 효율 % : <span id="efficient-price-2">약 [0] %</span></div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div>
+    <span class="footer-text">Recent Update: 2024년 4월 9일</span><br/>
+    <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
+  </div>
+</footer>
+
+<!-- API로 데이터를 처리할 수 있는 서버와의 통신을 위한 스크립트를 여기에 추가할 수 있습니다. -->
+<script>
+  // 모든 input 요소를 가져옵니다.
+  const inputs = document.querySelectorAll('input');
+
+  // 모든 input 요소에 대해 이벤트 리스너를 추가합니다.
+  inputs.forEach(input => {
+    input.addEventListener('input', function () {
+      // 입력된 값이 9999를 초과하는지, 문자인지, 음수인지 확인합니다.
+      if (this.id === 'title23' || this.id === 'title46') {
+        ;
+      } else if (parseInt(this.value) > 9999 || isNaN(this.value) || parseInt(this.value) < 0) {
+        // 입력된 값이 조건을 만족하면 값을 0으로 설정합니다.
+        this.value = 0;
+        alert("0 이상 9999 이하의 숫자만 입력할 수 있습니다.");
+      }
+    });
+  });
+
+  // 구매가격 입력 상자에 대한 이벤트 리스너를 추가합니다.
+  const purchasePriceInput = document.getElementById('title23');
+  purchasePriceInput.addEventListener('input', function () {
+    // 입력된 값이 0보다 작거나 NaN인 경우 0으로 설정합니다.
+    if (parseInt(this.value) < 0 || isNaN(this.value)) {
+      this.value = 0;
+    }
+    // 입력된 값이 999999999999를 초과하는지 확인하고, 초과하는 경우 값을 제한합니다.
+    if (parseInt(this.value) > 999999999999) {
+      this.value = 999999999999;
+    }
+  });
+
+  const purchasePriceInput2 = document.getElementById('title46');
+  purchasePriceInput2.addEventListener('input', function () {
+    // 입력된 값이 0보다 작거나 NaN인 경우 0으로 설정합니다.
+    if (parseInt(this.value) < 0 || isNaN(this.value)) {
+      this.value = 0;
+    }
+    // 입력된 값이 999999999999를 초과하는지 확인하고, 초과하는 경우 값을 제한합니다.
+    if (parseInt(this.value) > 999999999999) {
+      this.value = 999999999999;
+    }
+  });
+
+  function calculateTotal(type, main1, main2, main3, main4, sub1, sub2, sub3, sub4, mainPer1,
+      mainPer2, subPer1, subPer2, all1, all2, all3, attack1, attack2, attack3, cri1, cri2, cri3,
+      boss, price) {
+
+    const totalMainStat =
+        parseInt(document.getElementById(main1).value) +
+        parseInt(document.getElementById(main2).value) +
+        parseInt(document.getElementById(main3).value) +
+        parseInt(document.getElementById(main4).value);
+    const totalSubStat =
+        parseInt(document.getElementById(sub1).value) +
+        parseInt(document.getElementById(sub2).value) +
+        parseInt(document.getElementById(sub3).value) +
+        parseInt(document.getElementById(sub4).value);
+    const totalMainStatPer =
+        parseInt(document.getElementById(mainPer1).value) +
+        parseInt(document.getElementById(mainPer2).value);
+    const totalSubStatPer =
+        parseInt(document.getElementById(subPer1).value) +
+        parseInt(document.getElementById(subPer2).value);
+    const totalAllStatPer =
+        parseInt(document.getElementById(all1).value) +
+        parseInt(document.getElementById(all2).value) +
+        parseInt(document.getElementById(all3).value);
+    const totalAttack =
+        parseInt(document.getElementById(attack1).value) +
+        parseInt(document.getElementById(attack2).value) +
+        parseInt(document.getElementById(attack3).value);
+    const totalCriticalDamagePer =
+        parseInt(document.getElementById(cri1).value) +
+        parseInt(document.getElementById(cri2).value) +
+        parseInt(document.getElementById(cri3).value);
+    const totalBossDamagePer =
+        parseInt(document.getElementById(boss).value);
+    const total = totalMainStat + totalSubStat / 10 + totalMainStatPer * 10 + totalSubStatPer
+        + totalAllStatPer * 10 + totalAllStatPer + totalAttack * 4 + totalCriticalDamagePer
+        * 40 + totalBossDamagePer * 11;
+    const totalPrice = parseInt(document.getElementById(price).value);
+
+    if (type === 1) {
+      if (total === 0 || totalPrice === 0) {
+        document.getElementById("total-stats-1").textContent = '약 [' + Math.round(
+            total / 10 * 100) / 100 + '] %';
+        document.getElementById("price-percentage-1").textContent = '-';
+        document.getElementById("efficient-price-1").textContent = '-';
+      } else {
+        document.getElementById("total-stats-1").textContent = '약 [' + Math.round(
+            total / 10 * 100) / 100 + '] %';
+        document.getElementById("price-percentage-1").textContent = '약 [' + Math.round(
+            totalPrice / (total / 10) / 100000000 * 100) / 100 + ']억 메소';
+        document.getElementById("efficient-price-1").textContent = '약 [' + Math.round(
+            total / 10 / (totalPrice / 100000000) * 100) / 100 + '] %';
+      }
+    }
+    if (type === 2) {
+      if (total === 0 || totalPrice === 0) {
+        document.getElementById("total-stats-2").textContent = '약 [' + Math.round(
+            total / 10 * 100) / 100 + '] %';
+        document.getElementById("price-percentage-2").textContent = '-';
+        document.getElementById("efficient-price-2").textContent = '-';
+      } else {
+        document.getElementById("total-stats-2").textContent = '약 [' + Math.round(
+            total / 10 * 100) / 100 + '] %';
+        document.getElementById("price-percentage-2").textContent = '약 [' + Math.round(
+            totalPrice / (total / 10) / 100000000 * 100) / 100 + ']억 메소';
+        document.getElementById("efficient-price-2").textContent = '약 [' + Math.round(
+            total / 10 / (totalPrice / 100000000) * 100) / 100 + '] %';
+      }
+    }
+  }
+</script>
+
+</body>
