@@ -96,7 +96,7 @@ jobs:
           script: |
               sudo docker rm -f $(docker ps -qa)
               sudo docker pull ${{ secrets.DOCKER_REPO }}/maple-prod
-              docker-compose up -d
+              docker-compose-prod up -d
               docker image prune -f
 
     - name: Deploy to dev
@@ -111,6 +111,6 @@ jobs:
         script: |
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_REPO }}/maple-dev
-            docker-compose up -d
+            docker-compose-dev up -d
             docker image prune -f
 
