@@ -45,11 +45,9 @@ jobs:
       if: contains(github.ref, 'develop')
       run: |
         cd ./src/main/resources
-        
-        # application-dev.yml파일 생성
+
         touch ./application-dev.yml
-        
-        # gitHub secrets에서 설정한 값들을 파일에 작성
+
         echo "${{ secrets.YML_DEV }}" >./application-dev.yml
       shell: bash
 
@@ -67,15 +65,12 @@ jobs:
 
     # docker build and push
     - name: Docker build & push to prod
-      # branch가 main일 때
       if: contains(github.ref, 'main')
       run: |
         docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-        
-        # docker파일로 빌드
+
         docker build -f Dockerfile-prod -t ${{secrets.DOCKER_REPO}}/maple-prod .
-        
-        # remote 레포지토리로 push
+
         docker push ${{secrets.DOCKER_REPO}}/maple-prod
 
     - name: Docker build & push to dev
