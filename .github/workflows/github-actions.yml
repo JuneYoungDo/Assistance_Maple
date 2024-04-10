@@ -86,7 +86,7 @@ jobs:
       id: deploy-prod
       if: contains(github.ref, 'main')
       with:
-#          host: ${{ secrets.HOST_PROD }}
+          host: ${{ secrets.HOST_PROD }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
@@ -101,7 +101,7 @@ jobs:
       id: deploy-dev
       if: contains(github.ref, 'develop')
       with:
-#        host: ${{ secrets.HOST_DEV }}
+        host: ${{ secrets.HOST_DEV }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: 22
