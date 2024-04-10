@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MainController {
+//    test
 
     /**
      * 메인 화면 가져오기
