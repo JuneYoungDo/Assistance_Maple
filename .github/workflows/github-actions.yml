@@ -88,12 +88,12 @@ jobs:
       with:
           host: ${{ secrets.HOST_PROD }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
               sudo docker rm -f $(docker ps -qa)
               sudo docker pull ${{ secrets.DOCKER_USERNAME }}/maple-prod
-              docker-compose-prod up -d
+              docker-compose up -d
               docker image prune -f
 
     - name: Deploy to dev
@@ -108,6 +108,6 @@ jobs:
         script: |
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/maple-dev
-            docker-compose-dev up -d
+            docker-compose up -d
             docker image prune -f
 
