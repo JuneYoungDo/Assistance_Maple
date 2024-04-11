@@ -106,7 +106,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-            sudo docker rm -f $(docker ps -qa)
+            sudo docker rm -f ${{ secrets.DOCKER_USERNAME }}/maple-dev
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/maple-dev
             docker-compose up -d
             docker image prune -f
