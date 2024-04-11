@@ -2,7 +2,7 @@
 <html lang="ko">
 <!-- Font Awesome 라이브러리 추가 -->
 <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">\
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <meta charset="UTF-8">
@@ -306,13 +306,14 @@
     .result-box {
       display: flex;
       justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
-      margin: 0 40.4vw;
+      margin: 0 30.4vw;
       gap: 1vw; /* 작은 상자 사이의 간격을 설정 */
     }
 
     .result {
       padding: 0.6vh 2.5vw 0 0.4vw;
       border-radius: 10px;
+      margin-left: 6vw;
       background-color: #ffffff;
       border: none;
     }
@@ -325,6 +326,7 @@
     .result-2 {
       padding: 0.6vh 2.5vw 0 0.4vw;
       border-radius: 10px;
+      margin-right: 6vw;
       background-color: #FFDAB9;
       border: none;
     }
@@ -424,7 +426,7 @@
   </style>
 </head>
 <body>
-<!-- 위쪽 네비게이션 바 -->
+
 <nav>
   <ul>
     <li class="logo"><a href="/">🍁 Maple 아이템 가성비 계산기</a>
@@ -769,12 +771,11 @@
 
 <footer>
   <div>
-    <span class="footer-text">Recent Update: 2024년 4월 9일</span><br/>
+    <span class="footer-text">Recent Update: 2024년 4월 11일</span><br/>
     <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
   </div>
 </footer>
 
-<!-- API로 데이터를 처리할 수 있는 서버와의 통신을 위한 스크립트를 여기에 추가할 수 있습니다. -->
 <script>
   // 모든 input 요소를 가져옵니다.
   const inputs = document.querySelectorAll('input');
