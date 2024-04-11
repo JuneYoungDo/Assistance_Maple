@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="ko">
 <!-- Font Awesome 라이브러리 추가 -->
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -78,6 +79,22 @@
       float: right;
     }
 
+    .level {
+      font-size: x-large;
+      font-weight: 500;
+      margin-left: 30px;
+    }
+
+    .level input {
+      width: 100px;
+      height: 40px;
+      border-radius: 10px;
+      border: 0px;
+      text-align: center;
+      font-size: large;
+      color: #cccccc;
+    }
+
     .large-box-container-title {
       font-size: xx-large;
       padding: 20px 15px; /* 위아래와 좌우 padding 값을 조정 */
@@ -96,7 +113,7 @@
 
     .tooltip .tooltip-text {
       visibility: hidden;
-      width: 500px;
+      width: 750px;
       text-align: left;
       border: 2px solid #FFDAB9;
       background: white;
@@ -294,9 +311,10 @@
     }
 
     .result {
-      border: 3px solid #FFDAB9;
       padding: 10px 80px 0px 5px;
-      border-radius: 8px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      border: none;
     }
 
     .result li {
@@ -305,9 +323,10 @@
     }
 
     .result-2 {
-      border: 3px solid white;
       padding: 10px 80px 0px 5px;
-      border-radius: 8px;
+      border-radius: 10px;
+      background-color: #FFDAB9;
+      border: none;
     }
 
     .result-2 li {
@@ -317,7 +336,6 @@
 
     @media screen and (max-width: 600px) {
       /* 화면의 너비가 600px 이하일 때 적용되는 스타일 */
-
       .small-box {
         width: calc(100% - 20px); /* 작은 상자를 한 줄에 표시하도록 너비 조정 */
       }
@@ -343,7 +361,19 @@
 <!-- 위쪽 네비게이션 바 -->
 <nav>
   <ul>
-    <li class="logo"><a href="#">🍁 Maple 아이템 가성비 계산기</a></li>
+    <li class="logo"><a href="#">🍁 Maple 아이템 가성비 계산기</a>
+      <div class="tooltip">&nbsp;
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip-text">
+      우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다. <br/><br/>
+      아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. <br/><br/>
+      그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
+      메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다.<br/><br/>
+      추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
+      감사합니다.
+      </span>
+      </div>
+    </li>
   </ul>
   <ul>
     <li><a href="#"> 방어구 </a></li> <!-- 메뉴1 추가 -->
@@ -353,16 +383,18 @@
 
 <div class="large-box-container-title">
   방어구 비교하기
-  <div class="tooltip">&nbsp;
-    <i class="fas fa-question-circle"></i>
-    <span class="tooltip-text">
-      우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다. <br/><br/>
-      아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. <br/><br/>
-      그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
-      메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다.<br/><br/>
-      추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
-      감사합니다.
-    </span>
+<!--  <div class="tooltip">&nbsp;-->
+<!--    <i class="fas fa-question-circle"></i>-->
+<!--    <span class="tooltip-text">-->
+<!--      [방어구 비교하기 사용법]<br/><br/>-->
+<!--      - 레벨을 입력합니다 <br/><br/>-->
+<!--      - 비교 하고자 하는 두 장비의 수치를 입력합니다(-->
+
+<!--    </span>-->
+<!--  </div>-->
+  <div class="level">
+    Lv.
+    <input type="text" id="level" value="0">
   </div>
 </div>
 <!-- 상자들을 포함하는 컨테이너 -->
@@ -480,6 +512,10 @@
         <div class="input-container">
           <label for="title17">크리티컬 데미지 % : </label>
           <input type="text" id="title17" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title47">9레벨당 주스탯 + : </label>
+          <input type="text" id="title47" value="0" min="0" max="9999">
         </div>
       </div>
 
@@ -618,6 +654,10 @@
         <div class="input-container">
           <label for="title40">크리티컬 데미지 % : </label>
           <input type="text" id="title40" value="0" min="0" max="9999">
+        </div>
+        <div class="input-container">
+          <label for="title48">9레벨당 주스탯 + : </label>
+          <input type="text" id="title48" value="0" min="0" max="9999">
         </div>
       </div>
 
@@ -794,3 +834,4 @@
 </script>
 
 </body>
+</html>
