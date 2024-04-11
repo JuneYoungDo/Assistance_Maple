@@ -17,11 +17,11 @@
 
     nav {
       background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-      padding: 15px 20px; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 1.5vh 2vw; /* 위아래와 좌우 padding 값을 조정 */
       display: flex;
       justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
       align-items: center; /* 수직 가운데 정렬 */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      box-shadow: 0 0.2vh 0.4vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
       margin-bottom: 5vw;
       font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
@@ -41,15 +41,15 @@
     }
 
     nav ul li {
-      margin-left: 100px; /* 각 메뉴 사이의 간격을 늘림 */
+      margin-left: 5vw; /* 각 메뉴 사이의 간격을 늘림 */
     }
 
     nav ul li:first-child {
-      margin-left: 10px; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+      margin-left: 0.1vw; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
     }
 
     nav ul li:last-child {
-      margin-right: 30px;
+      margin-right: 0.3vw;
     }
 
     nav ul li a {
@@ -64,11 +64,11 @@
 
     footer {
       background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-      padding: 30px 20px; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 1.5vh 3vw; /* 위아래와 좌우 padding 값을 조정 */
       display: block;
       justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
       align-items: center; /* 수직 가운데 정렬 */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      box-shadow: 0 0.2vh 0.44vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
       font-size: 1rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
@@ -82,25 +82,25 @@
     .level {
       font-size: x-large;
       font-weight: 500;
-      margin-left: 30px;
+      margin-left: 1vw;
     }
 
     .level input {
-      width: 100px;
-      height: 40px;
+      width: 4vw;
+      height: 2.5vh;
       border-radius: 10px;
-      border: 0px;
+      border: 0;
       text-align: center;
       font-size: large;
-      color: #cccccc;
+      color: black;
     }
 
     .large-box-container-title {
       font-size: xx-large;
-      padding: 20px 15px; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 1.34vh 0.6vw; /* 위아래와 좌우 padding 값을 조정 */
       font-weight: 700;
       display: flex;
-      margin-bottom: 4px; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
+      margin-bottom: 0.26vh; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
       margin-left: 18vw; /* 왼쪽에 빈 공간을 추가 */
       margin-right: 18vw; /* 오른쪽에 빈 공간을 추가 */
       color: black;
@@ -113,18 +113,18 @@
 
     .tooltip .tooltip-text {
       visibility: hidden;
-      width: 750px;
+      width: 29vw;
       text-align: left;
       border: 2px solid #FFDAB9;
       background: white;
       color: black;
       border-radius: 6px;
-      padding: 5px;
+      padding: 0.1vw;
       position: absolute;
       z-index: 1;
       top: 50%;
       left: 300%;
-      margin-left: -60px;
+      margin-left: -2.3vw;
       opacity: 0;
       transition: opacity 0.3s;
       font-size: 14px;
@@ -135,7 +135,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      margin-left: -5px;
+      margin-left: -0.15vw;
       border-width: 5px;
       border-style: solid;
       border-color: #000 transparent transparent transparent;
@@ -160,20 +160,20 @@
     .large-box-1 {
       width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
       overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
-      margin-bottom: 20px; /* 각 큰 상자 사이의 간격을 추가 */
+      margin-bottom: 1.5vh;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
       border-radius: 10px;
       background-color: #ffffff;
       border: none;
-      padding: 10px 1px 10px 10px;
+      padding: 0.6vh 0.04vw 0.6vh 0.4vw;
     }
 
     .large-box-2 {
       width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
       overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
-      padding: 10px 1px 10px 10px;
-      margin-bottom: 20px; /* 각 큰 상자 사이의 간격을 추가 */
+      padding: 0.6vh 0.04vw 0.6vh 0.4vw;
+      margin-bottom: 1.5vh; /* 각 큰 상자 사이의 간격을 추가 */
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
       border-radius: 10px;
@@ -182,8 +182,8 @@
     }
 
     .small-box-container-title-1 {
-      padding: 10px 20px;
-      margin-left: 10px;
+      padding: 0.9vh 0.6vw;
+      margin-left: 0.4vw;
       font-weight: 600;
       background: linear-gradient(to left, #FFFFFF 30%, #FFDAB9 100%);
       border-radius: 10px;
@@ -191,27 +191,27 @@
     }
 
     .small-box-container-title-2 {
-      padding: 10px 20px;
+      padding: 0.9vh 0.6vw;
       font-weight: 600;
       background: linear-gradient(to left, #ffffff 30%, #FFDAB9 100%);
       border-radius: 10px;
       color: #FF5733;
       text-align: right;
-      margin-right: 17px;
+      margin-right: 0.7vw;
     }
 
     .small-box-container {
       display: flex;
       flex-wrap: wrap; /* 작은 상자를 한 줄에 넘치면 다음 줄로 넘어가도록 설정 */
-      gap: 10px; /* 작은 상자 사이의 간격을 설정 */
-      padding: 10px; /* 작은 상자들 사이의 간격을 조절 */
+      gap: 0.4vw; /* 작은 상자 사이의 간격을 설정 */
+      padding: 0.4vw; /* 작은 상자들 사이의 간격을 조절 */
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
     }
 
     .small-box {
       width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
       border: 2px solid #FFDAB9;
-      padding: 10px 20px;
+      padding: 0.5vh 0.7vw;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       border-radius: 10px;
       display: flex;
@@ -224,13 +224,13 @@
     }
 
     .small-box div {
-      margin-bottom: 14px;
+      margin-bottom: 1vh;
     }
 
     .small-box-2 {
       width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
       border: 2px solid #ffffff;
-      padding: 10px 20px;
+      padding: 0.5vh 0.7vw;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       border-radius: 10px;
       display: flex;
@@ -243,7 +243,7 @@
     }
 
     .small-box-2 div {
-      margin-bottom: 14px;
+      margin-bottom: 1vh;
     }
 
     .input-container {
@@ -254,9 +254,9 @@
     }
 
     .input-container label {
-      margin-right: 10px;
+      margin-right: 0.4vw;
       font-size: medium; /* 제목의 크기를 줄임 */
-      width: 150px;
+      width: 5.5vw;
     }
 
     .input-container input {
@@ -265,15 +265,15 @@
       text-align: right;
       border-radius: 5px; /* 테두리를 둥글게 설정 */
       border: 1px solid #ccc; /* 테두리 추가 */
-      padding: 6px; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+      padding: 0.45vh; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
     }
 
     .submit-button {
       position: absolute; /* 제출 버튼의 위치 설정 */
-      bottom: 15px; /* 아래에서 10px 떨어진 위치에 배치 */
-      right: 20px; /* 오른쪽에서 10px 떨어진 위치에 배치 */
+      bottom: 1vh;
+      right: 0.8vw;
       font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
-      padding: 20px; /* 버튼 내부의 여백 설정 */
+      padding: 0.7vw; /* 버튼 내부의 여백 설정 */
       border-radius: 8px;
       border: none; /* 테두리 없애기 */
       background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
@@ -287,10 +287,10 @@
 
     .submit-button-2 {
       position: absolute; /* 제출 버튼의 위치 설정 */
-      bottom: 15px; /* 아래에서 10px 떨어진 위치에 배치 */
-      right: 20px; /* 오른쪽에서 10px 떨어진 위치에 배치 */
+      bottom: 1vh;
+      right: 0.8vw;
       font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
-      padding: 20px; /* 버튼 내부의 여백 설정 */
+      padding: 0.7vw; /* 버튼 내부의 여백 설정 */
       border-radius: 8px;
       border: none; /* 테두리 없애기 */
       background-color: white; /* 파스텔 계열의 옅은 주황색 */
@@ -305,63 +305,62 @@
     .result-box {
       display: flex;
       justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
-      /* 좌우 여백을 조절 */
-      flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
       margin: 0 40.4vw;
+      gap: 1vw; /* 작은 상자 사이의 간격을 설정 */
     }
 
     .result {
-      padding: 10px 80px 0px 5px;
+      padding: 0.6vh 2.5vw 0 0.4vw;
       border-radius: 10px;
       background-color: #ffffff;
       border: none;
     }
 
     .result li {
-      margin-left: 10px;
+      margin-left: 0.4vw;
       font-weight: 500;
     }
 
     .result-2 {
-      padding: 10px 80px 0px 5px;
+      padding: 0.6vh 2.5vw 0 0.4vw;
       border-radius: 10px;
       background-color: #FFDAB9;
       border: none;
     }
 
     .result-2 li {
-      margin-left: 10px;
+      margin-left: 0.4vw;
       font-weight: 500;
     }
 
-    @media screen and (max-width: 600px) {
-      /* 화면의 너비가 600px 이하일 때 적용되는 스타일 */
-      .small-box {
-        width: calc(100% - 20px); /* 작은 상자를 한 줄에 표시하도록 너비 조정 */
-      }
+    /*@media screen and (max-width: 600px) {*/
+    /*  !* 화면의 너비가 600px 이하일 때 적용되는 스타일 *!*/
+    /*  .small-box {*/
+    /*    width: calc(100% - 20px); !* 작은 상자를 한 줄에 표시하도록 너비 조정 *!*/
+    /*  }*/
 
-      nav {
-        margin-bottom: 10px; /* 작은 화면에서 네비게이션 바와 다음 요소 사이의 간격을 줄임 */
-        justify-content: center; /* 네비게이션 바를 가운데 정렬 */
-        margin-left: 0; /* 왼쪽 빈 공간 제거 */
-        margin-right: 0; /* 오른쪽 빈 공간 제거 */
-      }
+    /*  nav {*/
+    /*    margin-bottom: 10px; !* 작은 화면에서 네비게이션 바와 다음 요소 사이의 간격을 줄임 *!*/
+    /*    justify-content: center; !* 네비게이션 바를 가운데 정렬 *!*/
+    /*    margin-left: 0; !* 왼쪽 빈 공간 제거 *!*/
+    /*    margin-right: 0; !* 오른쪽 빈 공간 제거 *!*/
+    /*  }*/
 
-      .large-box-container {
-        margin: 0; /* 좌우 여백 제거 */
-      }
+    /*  .large-box-container {*/
+    /*    margin: 0; !* 좌우 여백 제거 *!*/
+    /*  }*/
 
-      .input-container {
-        width: auto; /* 입력 상자의 너비를 자동으로 조정 */
-      }
-    }
+    /*  .input-container {*/
+    /*    width: auto; !* 입력 상자의 너비를 자동으로 조정 *!*/
+    /*  }*/
+    /*}*/
   </style>
 </head>
 <body>
 <!-- 위쪽 네비게이션 바 -->
 <nav>
   <ul>
-    <li class="logo"><a href="#">🍁 Maple 아이템 가성비 계산기</a>
+    <li class="logo"><a href="index.html">🍁 Maple 아이템 가성비 계산기</a>
       <div class="tooltip">&nbsp;
         <i class="fas fa-question-circle"></i>
         <span class="tooltip-text">
@@ -383,15 +382,15 @@
 
 <div class="large-box-container-title">
   방어구 비교하기
-<!--  <div class="tooltip">&nbsp;-->
-<!--    <i class="fas fa-question-circle"></i>-->
-<!--    <span class="tooltip-text">-->
-<!--      [방어구 비교하기 사용법]<br/><br/>-->
-<!--      - 레벨을 입력합니다 <br/><br/>-->
-<!--      - 비교 하고자 하는 두 장비의 수치를 입력합니다(-->
+  <!--  <div class="tooltip">&nbsp;-->
+  <!--    <i class="fas fa-question-circle"></i>-->
+  <!--    <span class="tooltip-text">-->
+  <!--      [방어구 비교하기 사용법]<br/><br/>-->
+  <!--      - 레벨을 입력합니다 <br/><br/>-->
+  <!--      - 비교 하고자 하는 두 장비의 수치를 입력합니다(-->
 
-<!--    </span>-->
-<!--  </div>-->
+  <!--    </span>-->
+  <!--  </div>-->
   <div class="level">
     Lv.
     <input type="text" id="level" value="0">
@@ -535,7 +534,7 @@
     'title2','title9','title15','title19',
     'title5','title11','title6','title12',
     'title4','title7','title13','title3','title16','title20',
-    'title10','title17','title22','title21','title23'
+    'title10','title17','title22','title21','title23','title47','level'
     )">계산하기
     </button>
   </div>
@@ -677,7 +676,7 @@
     'title25','title32','title38','title42',
     'title28','title34','title29','title35',
     'title27','title30','title36','title26','title39','title43',
-    'title33','title40','title45','title44','title46'
+    'title33','title40','title45','title44','title46','title48','level'
     )">계산하기
     </button>
   </div>
@@ -763,13 +762,15 @@
 
   function calculateTotal(type, main1, main2, main3, main4, sub1, sub2, sub3, sub4, mainPer1,
       mainPer2, subPer1, subPer2, all1, all2, all3, attack1, attack2, attack3, cri1, cri2, cri3,
-      boss, price) {
+      boss, price, levelStat, level) {
 
     const totalMainStat =
         parseInt(document.getElementById(main1).value) +
         parseInt(document.getElementById(main2).value) +
         parseInt(document.getElementById(main3).value) +
-        parseInt(document.getElementById(main4).value);
+        parseInt(document.getElementById(main4).value) +
+        ((parseInt(document.getElementById(level).value) / 9) * parseInt(
+            document.getElementById(levelStat).value));
     const totalSubStat =
         parseInt(document.getElementById(sub1).value) +
         parseInt(document.getElementById(sub2).value) +
