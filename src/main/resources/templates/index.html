@@ -333,27 +333,93 @@
       font-weight: 500;
     }
 
-    /*@media screen and (max-width: 600px) {*/
-    /*  !* 화면의 너비가 600px 이하일 때 적용되는 스타일 *!*/
-    /*  .small-box {*/
-    /*    width: calc(100% - 20px); !* 작은 상자를 한 줄에 표시하도록 너비 조정 *!*/
-    /*  }*/
+    @media (max-width: 768px) {
+      nav {
+        padding: 3vh 5vw; /* 위아래와 좌우 padding 값을 조정 */
+        flex-direction: column; /* 네비게이션 메뉴를 세로로 배치 */
+        align-items: flex-start; /* 메뉴 항목을 왼쪽으로 정렬 */
+        margin-bottom: 5vw;
+      }
 
-    /*  nav {*/
-    /*    margin-bottom: 10px; !* 작은 화면에서 네비게이션 바와 다음 요소 사이의 간격을 줄임 *!*/
-    /*    justify-content: center; !* 네비게이션 바를 가운데 정렬 *!*/
-    /*    margin-left: 0; !* 왼쪽 빈 공간 제거 *!*/
-    /*    margin-right: 0; !* 오른쪽 빈 공간 제거 *!*/
-    /*  }*/
+      .logo a {
+        font-size: 1.2rem; /* 로고의 글자 크기를 줄임 */
+      }
 
-    /*  .large-box-container {*/
-    /*    margin: 0; !* 좌우 여백 제거 *!*/
-    /*  }*/
+      nav ul li {
+        margin: 1vh 0; /* 각 메뉴 사이의 간격을 조절 */
+      }
 
-    /*  .input-container {*/
-    /*    width: auto; !* 입력 상자의 너비를 자동으로 조정 *!*/
-    /*  }*/
-    /*}*/
+      nav ul li:first-child {
+        margin-left: 0; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+      }
+
+      nav ul li:last-child {
+        margin-right: 0;
+      }
+
+      .large-box-container-title {
+        font-size: x-large; /* 큰 상자 컨테이너의 제목 글자 크기를 줄임 */
+        margin: 2vh 0; /* 제목 위아래에 여백 추가 */
+        margin-left: 5vw; /* 왼쪽에 빈 공간을 추가 */
+        margin-right: 5vw; /* 오른쪽에 빈 공간을 추가 */
+      }
+
+      .large-box-container {
+        margin: 0; /* 좌우 여백을 초기화 */
+      }
+
+      .large-box-1,
+      .large-box-2 {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 큰 상자 사이의 간격을 추가 */
+      }
+
+      .small-box-container-title-1,
+      .small-box-container-title-2 {
+        margin-left: 5vw; /* 왼쪽에 빈 공간을 추가 */
+        margin-right: 5vw; /* 오른쪽에 빈 공간을 추가 */
+      }
+
+      .small-box-container {
+        padding: 2vh 0; /* 작은 상자 컨테이너 위아래에 여백 추가 */
+      }
+
+      .small-box,
+      .small-box-2 {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 작은 상자 사이의 간격을 추가 */
+      }
+
+      .input-container label {
+        width: 50%; /* 레이블의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-right: 0; /* 레이블 오른쪽 마진 제거 */
+        margin-bottom: 1vh; /* 각 입력 필드 사이의 간격을 추가 */
+      }
+
+      .input-container input {
+        width: 100%; /* 입력 상자의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-bottom: 2vh; /* 각 입력 상자 아래 여백 추가 */
+      }
+
+      .submit-button,
+      .submit-button-2 {
+        position: static; /* 제출 버튼의 위치를 정적으로 설정하여 텍스트 흐름에 따라 배치 */
+        width: 100%; /* 버튼의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-bottom: 2vh; /* 제출 버튼 위아래 여백 추가 */
+        right: 0; /* 오른쪽 여백 제거 */
+      }
+
+      .result-box {
+        margin: 0; /* 좌우 여백을 초기화 */
+      }
+
+      .result,
+      .result-2 {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 결과 상자 사이의 간격을 추가 */
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -382,15 +448,6 @@
 
 <div class="large-box-container-title">
   방어구 비교하기
-  <!--  <div class="tooltip">&nbsp;-->
-  <!--    <i class="fas fa-question-circle"></i>-->
-  <!--    <span class="tooltip-text">-->
-  <!--      [방어구 비교하기 사용법]<br/><br/>-->
-  <!--      - 레벨을 입력합니다 <br/><br/>-->
-  <!--      - 비교 하고자 하는 두 장비의 수치를 입력합니다(-->
-
-  <!--    </span>-->
-  <!--  </div>-->
   <div class="level">
     Lv.
     <input type="text" id="level" value="0">
