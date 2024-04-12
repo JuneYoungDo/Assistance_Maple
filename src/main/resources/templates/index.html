@@ -5,11 +5,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
+  <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
           crossorigin="anonymous"></script>
   <meta charset="UTF-8">
-  <meta name="google-site-verification" content="ZWg0BZHEiUuSCMsLYJw1QjMPpSvNBzOt6lk__JoRUzg" />
-  <meta name="google-adsense-account" content="ca-pub-7922346678878671" />
+  <meta name="google-site-verification" content="ZWg0BZHEiUuSCMsLYJw1QjMPpSvNBzOt6lk__JoRUzg"/>
+  <meta name="google-adsense-account" content="ca-pub-7922346678878671"/>
+  <link rel="shortcut icon" href="#">
   <title>아이템 가성비 계산기</title>
   <style>
     /* CSS 스타일링 */
@@ -827,18 +829,66 @@
       mainPer2, subPer1, subPer2, all1, all2, all3, attack1, attack2, attack3, cri1, cri2, cri3,
       boss, price, levelStat, level) {
 
-    const totalMainStat =
-        parseInt(document.getElementById(main1).value) +
-        parseInt(document.getElementById(main2).value) +
-        parseInt(document.getElementById(main3).value) +
-        parseInt(document.getElementById(main4).value) +
-        ((parseInt(document.getElementById(level).value) / 9) * parseInt(
-            document.getElementById(levelStat).value));
-    const totalSubStat =
-        parseInt(document.getElementById(sub1).value) +
-        parseInt(document.getElementById(sub2).value) +
-        parseInt(document.getElementById(sub3).value) +
-        parseInt(document.getElementById(sub4).value);
+    let totalMainStat = 0;
+    let totalSubStat = 0;
+    let totalAttack = 0;
+    let totalBossDamagePer = 0;
+    let totalCriticalDamagePer = 0;
+
+    if (type == 1) {
+      totalMainStat =
+          parseInt(document.getElementById(main1).value) +
+          parseInt(document.getElementById(main2).value) +
+          parseInt(document.getElementById(main3).value) -
+          parseInt(document.getElementById(main4).value) +
+          ((parseInt(document.getElementById(level).value) / 9) * parseInt(
+              document.getElementById(levelStat).value));
+      totalSubStat =
+          parseInt(document.getElementById(sub1).value) +
+          parseInt(document.getElementById(sub2).value) +
+          parseInt(document.getElementById(sub3).value) -
+          parseInt(document.getElementById(sub4).value);
+
+      totalAttack =
+          parseInt(document.getElementById(attack1).value) +
+          parseInt(document.getElementById(attack2).value) -
+          parseInt(document.getElementById(attack3).value);
+
+      totalBossDamagePer =
+          (parseInt(document.getElementById(boss).value) * -1);
+
+      totalCriticalDamagePer =
+          parseInt(document.getElementById(cri1).value) +
+          parseInt(document.getElementById(cri2).value) -
+          parseInt(document.getElementById(cri3).value);
+    } else {
+      totalMainStat =
+          parseInt(document.getElementById(main1).value) +
+          parseInt(document.getElementById(main2).value) +
+          parseInt(document.getElementById(main3).value) +
+          parseInt(document.getElementById(main4).value) +
+          ((parseInt(document.getElementById(level).value) / 9) * parseInt(
+              document.getElementById(levelStat).value));
+
+      totalSubStat =
+          parseInt(document.getElementById(sub1).value) +
+          parseInt(document.getElementById(sub2).value) +
+          parseInt(document.getElementById(sub3).value) +
+          parseInt(document.getElementById(sub4).value);
+
+      totalAttack =
+          parseInt(document.getElementById(attack1).value) +
+          parseInt(document.getElementById(attack2).value) +
+          parseInt(document.getElementById(attack3).value);
+
+      totalCriticalDamagePer =
+          parseInt(document.getElementById(cri1).value) +
+          parseInt(document.getElementById(cri2).value) +
+          parseInt(document.getElementById(cri3).value);
+      totalBossDamagePer =
+          parseInt(document.getElementById(boss).value);
+    }
+
     const totalMainStatPer =
         parseInt(document.getElementById(mainPer1).value) +
         parseInt(document.getElementById(mainPer2).value);
@@ -849,20 +899,15 @@
         parseInt(document.getElementById(all1).value) +
         parseInt(document.getElementById(all2).value) +
         parseInt(document.getElementById(all3).value);
-    const totalAttack =
-        parseInt(document.getElementById(attack1).value) +
-        parseInt(document.getElementById(attack2).value) +
-        parseInt(document.getElementById(attack3).value);
-    const totalCriticalDamagePer =
-        parseInt(document.getElementById(cri1).value) +
-        parseInt(document.getElementById(cri2).value) +
-        parseInt(document.getElementById(cri3).value);
-    const totalBossDamagePer =
-        parseInt(document.getElementById(boss).value);
+
     const total = totalMainStat + totalSubStat / 10 + totalMainStatPer * 10 + totalSubStatPer
         + totalAllStatPer * 10 + totalAllStatPer + totalAttack * 4 + totalCriticalDamagePer
         * 40 + totalBossDamagePer * 11;
+
     const totalPrice = parseInt(document.getElementById(price).value);
+
+    console.log(total);
+    console.log(totalPrice);
 
     if (type === 1) {
       if (total === 0 || totalPrice === 0) {
