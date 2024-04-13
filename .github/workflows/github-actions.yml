@@ -57,7 +57,7 @@ jobs:
         cd ./src/main/resources
         touch ./application-prod.yml
         echo "${{ secrets.YML_PROD }}" >./application-prod.yml
-        cd ~
+        cd ./src/main/resources/templates
         touch ./ads.txt
         echo "${{ secrets.ADS }}" >./ads.txt
       shell: bash
