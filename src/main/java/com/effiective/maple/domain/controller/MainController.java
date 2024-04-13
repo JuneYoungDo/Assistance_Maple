@@ -17,6 +17,6 @@ public class MainController {
 
     @GetMapping("/ads.txt")
     public String getAdsPage() {
-        return "ads.txt";
+        return "ads.txt.html";
     }
 }
