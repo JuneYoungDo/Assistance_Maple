@@ -59,6 +59,14 @@ jobs:
         echo "${{ secrets.YML_PROD }}" >./application-prod.yml
       shell: bash
 
+    - name: make ads.txt
+        if: contains(github.ref, 'main')
+        run: |
+          cd .
+          touch ./ads.txt
+          echo "${{ secrets.ADS }}" >./ads.txt
+        shell: bash
+
     # build
     - name: Build with Gradle
       run: ./gradlew clean build -x test
