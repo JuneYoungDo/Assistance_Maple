@@ -59,12 +59,13 @@ public class MainService implements MainUseCase {
 
     @Override
     public String getPackageResult(PackageItem packageItem) {
-        Long voucherPriceForWon = packageItem.getVoucherPrice() / 100000000 * packageItem.getPointPrice();
+        Long voucherPriceForWon = packageItem.getVoucherPrice()/100000000 * packageItem.getPointPrice();
         Long noVoucherPackagePrice = packageItem.getPackagePrice() * 100000000 - voucherPriceForWon * 100000000;
         Long packagePriceForMeso = noVoucherPackagePrice / packageItem.getPointPrice();
         Long result = packagePriceForMeso / packageItem.getItemNum();
 
         String resultToString = DecimalFormat.getInstance().format(result);
+
 
         return resultToString;
     }
