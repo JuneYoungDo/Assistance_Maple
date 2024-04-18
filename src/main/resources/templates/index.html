@@ -74,7 +74,7 @@
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
       font-size: 1rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
-      margin-top: 4vw;
+      margin-top: 6vw;
     }
 
     .footer-text {
@@ -463,7 +463,7 @@
   <ul>
     <!--    <li><a href="#"> 무기류 </a></li> &lt;!&ndash; 메뉴1 추가 &ndash;&gt;-->
     <li><a th:href="@{/}"> 방어구 </a></li> <!-- 메뉴1 추가 -->
-    <!--    <li><a href="#"> 패키지 </a></li>-->
+    <li><a th:href="@{/package}"> 패키지 </a></li>
   </ul>
 </nav>
 <form method="get" th:action="@{/calculate}" th:object="${itemInformation}">

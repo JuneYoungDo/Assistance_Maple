@@ -105,4 +105,17 @@ public class RequestDto {
     public static class Price {
         private Long price = 0L;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class PackageItem {
+        private Long packagePrice = 0L;
+        private Long pointPrice = 0L;
+        private Long voucherPrice = 0L;
+        private Long itemNum = 0L;
+        private String result = "";
+    }
+
 }

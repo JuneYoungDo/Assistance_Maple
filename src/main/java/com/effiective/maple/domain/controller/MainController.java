@@ -1,6 +1,7 @@
 package com.effiective.maple.domain.controller;
 
 import com.effiective.maple.domain.dto.RequestDto.ItemInformation;
+import com.effiective.maple.domain.dto.RequestDto.PackageItem;
 import com.effiective.maple.domain.dto.ResponseDto.EfficientResult;
 import com.effiective.maple.domain.usecase.MainUseCase;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,24 @@ public class MainController {
         model.addAttribute("itemInformation", result);
 
         return "index";
+    }
+
+    @GetMapping("/package")
+    public String packagePage(Model model) {
+        PackageItem packageItem = mainUseCase.getInitPackageItem();
+        model.addAttribute("packageItem", packageItem);
+
+        return "package";
+    }
+
+    @GetMapping("/package/calculate")
+    public String packageCalculate(PackageItem packageItem,Model model) {
+        String price = mainUseCase.getPackageResult(packageItem);
+        PackageItem result;
+        result = packageItem;
+        result.setResult(price);
+        model.addAttribute("packageItem", result);
+
+        return "package";
     }
 }

@@ -5,6 +5,7 @@ import com.effiective.maple.domain.dto.RequestDto.EdiPotentialInformation;
 import com.effiective.maple.domain.dto.RequestDto.EquipInformation;
 import com.effiective.maple.domain.dto.RequestDto.ItemInformation;
 import com.effiective.maple.domain.dto.RequestDto.OptimizeStat;
+import com.effiective.maple.domain.dto.RequestDto.PackageItem;
 import com.effiective.maple.domain.dto.RequestDto.PotentialInformation;
 import com.effiective.maple.domain.dto.ResponseDto.Result;
 import com.effiective.maple.domain.usecase.MainUseCase;
@@ -54,6 +55,26 @@ public class MainService implements MainUseCase {
         }
 
         return itemInformation;
+    }
+
+    @Override
+    public String getPackageResult(PackageItem packageItem) {
+        Long voucherPriceForWon = packageItem.getVoucherPrice() / 100000000 * packageItem.getPointPrice();
+        Long noVoucherPackagePrice = packageItem.getPackagePrice() * 100000000 - voucherPriceForWon * 100000000;
+        Long packagePriceForMeso = noVoucherPackagePrice / packageItem.getPointPrice();
+        Long result = packagePriceForMeso / packageItem.getItemNum();
+
+        String resultToString = DecimalFormat.getInstance().format(result);
+
+        return resultToString;
+    }
+
+    @Override
+    public PackageItem getInitPackageItem() {
+        PackageItem packageItem = new PackageItem(29900L,3000L,200000000L,15L,"");
+        packageItem.setResult(getPackageResult(packageItem));
+
+        return packageItem;
     }
 
     private double getMainStat(ItemInformation itemInformation, int type) {

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<!-- Font Awesome 라이브러리 추가 -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="#">
+  <title>메이플 가성비 계산기</title>
+  <style>
+    /* CSS 스타일링 */
+    body {
+      margin: 0; /* body 요소의 기본 마진을 없앰 */
+      padding: 0; /* body 요소의 기본 패딩을 없앰 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴을 둥근 형식으로 변경 */
+      background: #FFF5E0;
+    }
+
+    nav {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 1.5vh 2vw; /* 위아래와 좌우 padding 값을 조정 */
+      display: flex;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 0.2vh 0.4vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      margin-bottom: 5vw;
+      font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+    }
+
+    .logo a {
+      font-size: 1.5rem; /* 로고의 글자 크기를 키움 */
+      color: black;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 5vw; /* 각 메뉴 사이의 간격을 늘림 */
+    }
+
+    nav ul li:first-child {
+      margin-left: 0.1vw; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+    }
+
+    nav ul li:last-child {
+      margin-right: 0.3vw;
+    }
+
+    nav ul li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s; /* 호버 효과를 위한 트랜지션 설정 */
+    }
+
+    nav ul li a:hover {
+      color: #FF5733; /* 호버시 글자색 변경 */
+    }
+
+    footer {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 1.5vh 3vw; /* 위아래와 좌우 padding 값을 조정 */
+      display: block;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 0.2vh 0.44vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      font-size: 1rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+      margin-top: 6vw;
+    }
+
+    .footer-text {
+      float: right;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 29vw;
+      text-align: left;
+      border: 2px solid #FFDAB9;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      padding: 0.1vw;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 300%;
+      margin-left: -2.3vw;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -0.15vw;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #000 transparent transparent transparent;
+      white-space: pre-line; /* 텍스트의 줄 바꿈 허용 */
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .large-box-container-title {
+      text-align: center;
+      padding: 1.34vh 0.6vw; /* 위아래와 좌우 padding 값을 조정 */
+      font-size: xx-large;
+      font-weight: 700;
+      margin: 0 36vw;
+      color: black;
+    }
+
+    .large-box-container {
+      display: flex;
+      flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
+      margin: 0 36vw;
+    }
+
+    .large-box-1 {
+      width: 100%;
+      overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
+      margin-bottom: 1.5vh;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
+      border-radius: 10px;
+      background-color: #ffffff;
+      border: none;
+      padding: 0.6vh 0.6vw 0.6vh 0.6vw;
+    }
+
+    .small-box-container {
+      display: flex;
+      flex-wrap: wrap; /* 작은 상자를 한 줄에 넘치면 다음 줄로 넘어가도록 설정 */
+      gap: 0.6vw; /* 작은 상자 사이의 간격을 설정 */
+      padding: 0.6vw; /* 작은 상자들 사이의 간격을 조절 */
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+    }
+
+    .small-box {
+      width: 100%; /* 작은 상자의 너비를 설정 */
+      border: 2px solid #FFDAB9;
+      padding: 0.5vh 0.7vw;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .small-box h3 {
+      font-weight: 400;
+      text-align: right;
+    }
+
+    .small-box div {
+      margin-bottom: 1vh;
+    }
+
+    .input-container {
+      display: flex;
+      align-items: center; /* 입력 필드를 수직으로 중앙에 정렬 */
+      width: 100%; /* 입력 상자의 너비를 100%로 설정하여 부모 컨테이너에 맞춤 */
+    }
+
+    .input-container label {
+      margin-right: 0.4vw;
+      font-size: large; /* 제목의 크기를 줄임 */
+      width: 13vw;
+    }
+
+    .input-container input {
+      flex: 1;
+      width: 100%; /* 입력 상자의 너비를 100%로 설정하여 부모 컨테이너에 맞춤 */
+      text-align: center;
+      border-radius: 5px; /* 테두리를 둥글게 설정 */
+      border: 1px solid #ccc; /* 테두리 추가 */
+      padding: 2vh; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+      margin: 1vh 0 1vh 0;
+      font-size: x-large;
+    }
+
+    .submit-button {
+      width: 100%;
+      /*position: absolute; !* 제출 버튼의 위치 설정 *!*/
+      bottom: 1vh;
+      right: 0.8vw;
+      font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
+      padding: 0.7vw; /* 버튼 내부의 여백 설정 */
+      border-radius: 8px;
+      border: none; /* 테두리 없애기 */
+      background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
+      color: white; /* 글자색을 흰색으로 설정 */
+      cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
+    }
+
+    .submit-button:hover {
+      background-color: #ff7f50; /* 호버시 배경색을 더 진한 주황색으로 변경 */
+    }
+
+    .result-box {
+      display: flex;
+      margin: 0 36vw;
+    }
+
+    .result {
+      width: 100%;
+      padding: 0.6vh 0 0 0.4vw;
+      border-radius: 10px;
+      background-color: #ffffff;
+      border: none;
+      list-style-type: none;
+    }
+
+    .result li ul input {
+      flex: 1;
+      width: 20%;
+      text-align: right;
+      border-radius: 5px; /* 테두리를 둥글게 설정 */
+      border: 2px solid #ccc; /* 테두리 추가 */
+      background-color: transparent;
+      padding: 0.4vh; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+      font-size: large;
+      font-weight: 500;
+      margin: 0 0.1vw 0 0.4vw;
+    }
+
+    .result li {
+      margin-left: 0.4vw;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 3vh 5vw; /* 위아래와 좌우 padding 값을 조정 */
+        flex-direction: column; /* 네비게이션 메뉴를 세로로 배치 */
+        align-items: flex-start; /* 메뉴 항목을 왼쪽으로 정렬 */
+        margin-bottom: 5vw;
+      }
+
+      .logo a {
+        font-size: 1.2rem; /* 로고의 글자 크기를 줄임 */
+      }
+
+      nav ul li {
+        margin: 1vh 0; /* 각 메뉴 사이의 간격을 조절 */
+      }
+
+      nav ul li:first-child {
+        margin-left: 0; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+      }
+
+      nav ul li:last-child {
+        margin-right: 0;
+      }
+
+      .large-box-container-title {
+        font-size: x-large; /* 큰 상자 컨테이너의 제목 글자 크기를 줄임 */
+        /* 제목 위아래에 여백 추가 */
+        /* 왼쪽에 빈 공간을 추가 */
+        /* 오른쪽에 빈 공간을 추가 */
+        margin: 2vh 5vw;
+      }
+
+      .large-box-container {
+        margin: 0; /* 좌우 여백을 초기화 */
+      }
+
+      .large-box-1 {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 큰 상자 사이의 간격을 추가 */
+      }
+
+      .small-box-container {
+        padding: 2vh 0; /* 작은 상자 컨테이너 위아래에 여백 추가 */
+      }
+
+      .small-box {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 작은 상자 사이의 간격을 추가 */
+      }
+
+      .input-container label {
+        width: 50%; /* 레이블의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-right: 0; /* 레이블 오른쪽 마진 제거 */
+        margin-bottom: 1vh; /* 각 입력 필드 사이의 간격을 추가 */
+      }
+
+      .input-container input {
+        width: 100%; /* 입력 상자의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-bottom: 2vh; /* 각 입력 상자 아래 여백 추가 */
+      }
+
+      .submit-button {
+        position: static; /* 제출 버튼의 위치를 정적으로 설정하여 텍스트 흐름에 따라 배치 */
+        width: 100%; /* 버튼의 너비를 100%로 설정하여 풀 너비로 확장 */
+        margin-bottom: 2vh; /* 제출 버튼 위아래 여백 추가 */
+        right: 0; /* 오른쪽 여백 제거 */
+      }
+
+      .result-box {
+        margin: 0; /* 좌우 여백을 초기화 */
+      }
+
+      .result {
+        width: 100%; /* 전체 너비를 차지하도록 설정 */
+        margin-bottom: 5vw; /* 각 결과 상자 사이의 간격을 추가 */
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <ul>
+    <li class="logo"><a href="/">🍁 Maple 가성비 계산기</a>
+      <div class="tooltip">&nbsp;
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip-text">
+      우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다. <br/><br/>
+      아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. <br/><br/>
+      그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
+      메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다.<br/><br/>
+      추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
+      감사합니다.
+      </span>
+      </div>
+    </li>
+  </ul>
+  <ul>
+    <!--    <li><a href="#"> 무기류 </a></li> &lt;!&ndash; 메뉴1 추가 &ndash;&gt;-->
+    <li><a th:href="@{/}"> 방어구 </a></li> <!-- 메뉴1 추가 -->
+    <li><a th:href="@{/package}"> 패키지 </a></li>
+  </ul>
+</nav>
+<form method="get" th:action="@{/package/calculate}" th:object="${packageItem}">
+  <div class="large-box-container-title">
+    패키지 계산기
+  </div>
+  <!-- 상자들을 포함하는 컨테이너 -->
+  <div class="large-box-container">
+    <!-- 첫 번째 큰 직사각형 상자 -->
+    <div class="large-box-1">
+      <div class="small-box-container">
+        <!-- 첫번 째 작은 사각형 상자 -->
+        <div class="small-box">
+          <!-- 입력 상자 -->
+          <h3>바우처 = 패키지 내의 보조 지원 상품</h3>
+          <div class="input-container">
+            <label for="equip-main-1">패키지 가격(메포) : </label>
+            <input type="text" id="equip-main-1" th:field="*{packagePrice}" min="0"
+                   max="9999">
+          </div>
+          <div class="input-container">
+            <label for="equip-sub-1">메포시세(1억당) : </label>
+            <input type="text" id="equip-sub-1" th:field="*{pointPrice}" min="0"
+                   max="9999">
+          </div>
+          <div class="input-container">
+            <label for="equip-attack-1">바우처 가격(메소) : </label>
+            <input type="text" id="equip-attack-1" th:field="*{voucherPrice}"
+                   min="0" max="9999">
+          </div>
+          <div class="input-container">
+            <label for="equip-all-1">패키지 내 아이템 개수 : </label>
+            <input type="text" id="equip-all-1" th:field="*{itemNum}" min="0"
+                   max="9999">
+          </div>
+        </div>
+
+        <button class="submit-button" name="calculate" th:value="1">계산하기
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="result-box">
+    <div class="result">
+      <li>패키지 내 물품 개당 가격
+        <ul>= 약 <input type="text" id="total-stats-1"
+                       th:field="*{result}" readonly/> 메소
+        </ul>
+      </li>
+      <li>
+        경매장에서의 해당 물품 가격이 위 가격보다 더 싸다면 경매장을 이용하는 것이 효율적
+      </li>
+    </div>
+
+  </div>
+</form>
+
+
+<footer>
+  <div>
+    <span class="footer-text">Recent Update: 2024.04.18 18:49</span><br/>
+    <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
+  </div>
+</footer>
+
+<script>
+  // 모든 input 요소를 가져옵니다.
+  const inputs = document.querySelectorAll('input');
+
+  // 모든 input 요소에 대해 이벤트 리스너를 추가합니다.
+  inputs.forEach(input => {
+    input.addEventListener('input', function () {
+      // 입력된 값이 9999를 초과하는지, 문자인지, 음수인지 확인합니다.
+      if (this.value === "" || parseInt(this.value) > 999999999999 || isNaN(this.value) || parseInt(
+          this.value) < 1) {
+        // 입력된 값이 조건을 만족하면 값을 0으로 설정합니다.
+        this.value = 1;
+        alert("1 이상 999999999999 이하의 숫자만 입력할 수 있습니다.");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
