@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <meta charset="UTF-8">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
+  <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
           crossorigin="anonymous"></script>
   <link rel="shortcut icon" href="#">
   <title>메이플 가성비 계산기</title>
@@ -168,6 +169,15 @@
       opacity: 1;
     }
 
+    .largest-box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .large-box-container-1 {
+      width: 50%;
+    }
+
     .large-box-container {
       display: flex;
       justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
@@ -175,7 +185,7 @@
       flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
       /* 왼쪽에 빈 공간을 추가 */
       /* 오른쪽에 빈 공간을 추가 */
-      margin: 0 18vw;
+      /*margin: 0 18vw;*/
     }
 
     .large-box-1 {
@@ -309,12 +319,12 @@
     .result-box {
       display: flex;
       justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
-      margin: 0 33vw;
+      margin: 0 31.2vw;
       gap: 1vw; /* 작은 상자 사이의 간격을 설정 */
     }
 
     .result {
-      width: 10vw;
+      width: 12vw;
       padding: 0.6vh 0 0 0.4vw;
       border-radius: 10px;
       margin-left: 6vw;
@@ -342,7 +352,7 @@
     }
 
     .result-2 {
-      width: 10vw;
+      width: 12vw;
       padding: 0.6vh 0 0 0.4vw;
       border-radius: 10px;
       margin-right: 6vw;
@@ -423,7 +433,7 @@
         margin-bottom: 2vh; /* 각 입력 상자 아래 여백 추가 */
       }
 
-      .submit-button{
+      .submit-button {
         position: static; /* 제출 버튼의 위치를 정적으로 설정하여 텍스트 흐름에 따라 배치 */
         width: 100%; /* 버튼의 너비를 100%로 설정하여 풀 너비로 확장 */
         margin-bottom: 2vh; /* 제출 버튼 위아래 여백 추가 */
@@ -509,363 +519,381 @@
     </div>
 
   </div>
-  <!-- 상자들을 포함하는 컨테이너 -->
-  <div class="large-box-container">
-    <!-- 첫 번째 큰 직사각형 상자 -->
-    <div class="large-box-1">
-      <div class="small-box-container-title-1">기존 장비 [장비 A]</div>
-      <div class="small-box-container">
-        <!-- 첫번 째 작은 사각형 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
-          <div class="input-container">
-            <label for="equip-main-1">주스탯 : </label>
-            <input type="text" id="equip-main-1" th:field="*{item1.equipInformation.main}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-sub-1">부스탯 : </label>
-            <input type="text" id="equip-sub-1" th:field="*{item1.equipInformation.sub}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-attack-1">공격력/마력 : </label>
-            <input type="text" id="equip-attack-1" th:field="*{item1.equipInformation.attack}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-all-1">올스탯 % : </label>
-            <input type="text" id="equip-all-1" th:field="*{item1.equipInformation.allPer}" min="0"
-                   max="9999">
-          </div>
-        </div>
 
-        <!-- 두 번째 작은 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <h3>빠지는 세트 옵션</h3>
-          <div class="input-container">
-            <label for="change-main-1">주스탯 : </label>
-            <input type="text" id="change-main-1" th:field="*{item1.changeInformation.main}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-sub-1">부스탯 : </label>
-            <input type="text" id="change-sub-1" th:field="*{item1.changeInformation.sub}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-attack-1">공격력 / 마력 : </label>
-            <input type="text" id="change-attack-1" th:field="*{item1.changeInformation.attack}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-boss-1">보스 공격력 % : </label>
-            <input type="text" id="change-boss-1" th:field="*{item1.changeInformation.boss}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-critical-1">크리티컬 데미지 % : </label>
-            <input type="text" id="change-critical-1" th:field="*{item1.changeInformation.critical}"
-                   min="0" max="9999">
-          </div>
-        </div>
+  <div class="largest-box">
+    <div class="large-box-container-1">
 
-        <!-- 세 번째 작은 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <h3>잠재능력</h3>
-          <div class="input-container">
-            <label for="potential-mainPer-1">주스탯 % : </label>
-            <input type="text" id="potential-mainPer-1"
-                   th:field="*{item1.potentialInformation.mainPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-subPer-1">부스탯 % : </label>
-            <input type="text" id="potential-subPer-1"
-                   th:field="*{item1.potentialInformation.subPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-allPer-1">올스탯 % : </label>
-            <input type="text" id="potential-allPer-1"
-                   th:field="*{item1.potentialInformation.allPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-main-1">주스탯 : </label>
-            <input type="text" id="potential-main-1" th:field="*{item1.potentialInformation.main}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-sub-1">부스탯 : </label>
-            <input type="text" id="potential-sub-1" th:field="*{item1.potentialInformation.sub}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-critical-1">크리티컬 데미지 % : </label>
-            <input type="text" id="potential-critical-1"
-                   th:field="*{item1.potentialInformation.critical}" min="0" max="9999">
-          </div>
-        </div>
-
-        <!-- 네 번째 작은 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <h3>에디셔널 잠재능력</h3>
-          <div class="input-container">
-            <label for="edi-potential-mainPer-1">주스탯 % : </label>
-            <input type="text" id="edi-potential-mainPer-1"
-                   th:field="*{item1.ediPotentialInformation.mainPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-subPer-1">부스탯 % : </label>
-            <input type="text" id="edi-potential-subPer-1"
-                   th:field="*{item1.ediPotentialInformation.subPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-allPer-1">올스탯 % : </label>
-            <input type="text" id="edi-potential-allPer-1"
-                   th:field="*{item1.ediPotentialInformation.allPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-main-1">주스탯 : </label>
-            <input type="text" id="edi-potential-main-1"
-                   th:field="*{item1.ediPotentialInformation.main}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-sub-1">부스탯 : </label>
-            <input type="text" id="edi-potential-sub-1"
-                   th:field="*{item1.ediPotentialInformation.sub}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-attack-1">공격력 / 마력 : </label>
-            <input type="text" id="edi-potential-attack-1"
-                   th:field="*{item1.ediPotentialInformation.attack}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-critical-1">크리티컬 데미지 % : </label>
-            <input type="text" id="edi-potential-critical-1"
-                   th:field="*{item1.ediPotentialInformation.critical}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-level-1">9레벨당 주스탯 + : </label>
-            <input type="text" id="edi-potential-level-1"
-                   th:field="*{item1.ediPotentialInformation.level}" min="0" max="9999">
-          </div>
-        </div>
-
-        <!-- 다섯 번째 작은 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <div class="input-container">
-            <label for="price-1">구매가격:</label>
-            <input type="text" id="price-1" th:field="*{item1.price.price}" min="0"
-                   max="999999999999">
-          </div>
-          <!-- 다른 입력 상자들도 추가할 수 있음 -->
-        </div>
-      </div>
-
-      <button class="submit-button" name="calculate" th:value="1">계산하기
-      </button>
     </div>
+    <!-- 상자들을 포함하는 컨테이너 -->
+    <div class="large-box-container">
+      <!-- 첫 번째 큰 직사각형 상자 -->
+      <div class="large-box-1">
+        <div class="small-box-container-title-1">기존 장비 [장비 A]</div>
+        <div class="small-box-container">
+          <!-- 첫번 째 작은 사각형 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
+            <div class="input-container">
+              <label for="equip-main-1">주스탯 : </label>
+              <input type="text" id="equip-main-1" th:field="*{item1.equipInformation.main}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-sub-1">부스탯 : </label>
+              <input type="text" id="equip-sub-1" th:field="*{item1.equipInformation.sub}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-attack-1">공격력/마력 : </label>
+              <input type="text" id="equip-attack-1" th:field="*{item1.equipInformation.attack}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-all-1">올스탯 % : </label>
+              <input type="text" id="equip-all-1" th:field="*{item1.equipInformation.allPer}"
+                     min="0"
+                     max="9999">
+            </div>
+          </div>
 
+          <!-- 두 번째 작은 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <h3>빠지는 세트 옵션</h3>
+            <div class="input-container">
+              <label for="change-main-1">주스탯 : </label>
+              <input type="text" id="change-main-1" th:field="*{item1.changeInformation.main}"
+                     min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-sub-1">부스탯 : </label>
+              <input type="text" id="change-sub-1" th:field="*{item1.changeInformation.sub}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-attack-1">공격력 / 마력 : </label>
+              <input type="text" id="change-attack-1" th:field="*{item1.changeInformation.attack}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-boss-1">보스 공격력 % : </label>
+              <input type="text" id="change-boss-1" th:field="*{item1.changeInformation.boss}"
+                     min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-critical-1">크리티컬 데미지 % : </label>
+              <input type="text" id="change-critical-1"
+                     th:field="*{item1.changeInformation.critical}"
+                     min="0" max="9999">
+            </div>
+          </div>
 
-    <!-- 두 번째 큰 직사각형 상자 -->
-    <div class="large-box-2">
-      <div class="small-box-container-title-2">구매할 장비 [장비 B]</div>
-      <div class="small-box-container">
-        <!-- 첫번 째 작은 사각형 상자 -->
-        <div class="small-box-2">
-          <!-- 입력 상자 -->
-          <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
-          <div class="input-container">
-            <label for="equip-main-2">주스탯 : </label>
-            <input type="text" id="equip-main-2" th:field="*{item2.equipInformation.main}" min="0"
-                   max="9999">
+          <!-- 세 번째 작은 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <h3>잠재능력</h3>
+            <div class="input-container">
+              <label for="potential-mainPer-1">주스탯 % : </label>
+              <input type="text" id="potential-mainPer-1"
+                     th:field="*{item1.potentialInformation.mainPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-subPer-1">부스탯 % : </label>
+              <input type="text" id="potential-subPer-1"
+                     th:field="*{item1.potentialInformation.subPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-allPer-1">올스탯 % : </label>
+              <input type="text" id="potential-allPer-1"
+                     th:field="*{item1.potentialInformation.allPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-main-1">주스탯 : </label>
+              <input type="text" id="potential-main-1" th:field="*{item1.potentialInformation.main}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-sub-1">부스탯 : </label>
+              <input type="text" id="potential-sub-1" th:field="*{item1.potentialInformation.sub}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-critical-1">크리티컬 데미지 % : </label>
+              <input type="text" id="potential-critical-1"
+                     th:field="*{item1.potentialInformation.critical}" min="0" max="9999">
+            </div>
           </div>
-          <div class="input-container">
-            <label for="equip-sub-2">부스탯 : </label>
-            <input type="text" id="equip-sub-2" th:field="*{item2.equipInformation.sub}" min="0"
-                   max="9999">
+
+          <!-- 네 번째 작은 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <h3>에디셔널 잠재능력</h3>
+            <div class="input-container">
+              <label for="edi-potential-mainPer-1">주스탯 % : </label>
+              <input type="text" id="edi-potential-mainPer-1"
+                     th:field="*{item1.ediPotentialInformation.mainPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-subPer-1">부스탯 % : </label>
+              <input type="text" id="edi-potential-subPer-1"
+                     th:field="*{item1.ediPotentialInformation.subPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-allPer-1">올스탯 % : </label>
+              <input type="text" id="edi-potential-allPer-1"
+                     th:field="*{item1.ediPotentialInformation.allPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-main-1">주스탯 : </label>
+              <input type="text" id="edi-potential-main-1"
+                     th:field="*{item1.ediPotentialInformation.main}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-sub-1">부스탯 : </label>
+              <input type="text" id="edi-potential-sub-1"
+                     th:field="*{item1.ediPotentialInformation.sub}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-attack-1">공격력 / 마력 : </label>
+              <input type="text" id="edi-potential-attack-1"
+                     th:field="*{item1.ediPotentialInformation.attack}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-critical-1">크리티컬 데미지 % : </label>
+              <input type="text" id="edi-potential-critical-1"
+                     th:field="*{item1.ediPotentialInformation.critical}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-level-1">9레벨당 주스탯 + : </label>
+              <input type="text" id="edi-potential-level-1"
+                     th:field="*{item1.ediPotentialInformation.level}" min="0" max="9999">
+            </div>
           </div>
-          <div class="input-container">
-            <label for="equip-attack-2">공격력/마력 : </label>
-            <input type="text" id="equip-attack-2" th:field="*{item2.equipInformation.attack}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-all-2">올스탯 % : </label>
-            <input type="text" id="equip-all-2" th:field="*{item2.equipInformation.allPer}" min="0"
-                   max="9999">
+
+          <!-- 다섯 번째 작은 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <div class="input-container">
+              <label for="price-1">구매가격:</label>
+              <input type="text" id="price-1" th:field="*{item1.price.price}" min="0"
+                     max="999999999999">
+            </div>
+            <!-- 다른 입력 상자들도 추가할 수 있음 -->
           </div>
         </div>
 
-        <!-- 두 번째 작은 상자 -->
-        <div class="small-box-2">
-          <!-- 입력 상자 -->
-          <h3>추가되는 세트 옵션</h3>
-          <div class="input-container">
-            <label for="change-main-2">주스탯 : </label>
-            <input type="text" id="change-main-2" th:field="*{item2.changeInformation.main}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-sub-2">부스탯 : </label>
-            <input type="text" id="change-sub-2" th:field="*{item2.changeInformation.sub}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-attack-2">공격력 / 마력 : </label>
-            <input type="text" id="change-attack-2" th:field="*{item2.changeInformation.attack}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-boss-2">보스 공격력 % : </label>
-            <input type="text" id="change-boss-2" th:field="*{item2.changeInformation.boss}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="change-critical-2">크리티컬 데미지 % : </label>
-            <input type="text" id="change-critical-2" th:field="*{item2.changeInformation.critical}"
-                   min="0" max="9999">
-          </div>
-        </div>
-
-        <!-- 세 번째 작은 상자 -->
-        <div class="small-box-2">
-          <!-- 입력 상자 -->
-          <h3>잠재능력</h3>
-          <div class="input-container">
-            <label for="potential-mainPer-2">주스탯 % : </label>
-            <input type="text" id="potential-mainPer-2"
-                   th:field="*{item2.potentialInformation.mainPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-subPer-2">부스탯 % : </label>
-            <input type="text" id="potential-subPer-2"
-                   th:field="*{item2.potentialInformation.subPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-allPer-2">올스탯 % : </label>
-            <input type="text" id="potential-allPer-2"
-                   th:field="*{item2.potentialInformation.allPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-main-2">주스탯 : </label>
-            <input type="text" id="potential-main-2" th:field="*{item2.potentialInformation.main}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-sub-2">부스탯 : </label>
-            <input type="text" id="potential-sub-2" th:field="*{item2.potentialInformation.sub}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="potential-critical-2">크리티컬 데미지 % : </label>
-            <input type="text" id="potential-critical-2"
-                   th:field="*{item2.potentialInformation.critical}" min="0" max="9999">
-          </div>
-        </div>
-
-        <!-- 네 번째 작은 상자 -->
-        <div class="small-box-2">
-          <!-- 입력 상자 -->
-          <h3>에디셔널 잠재능력</h3>
-          <div class="input-container">
-            <label for="edi-potential-mainPer-2">주스탯 % : </label>
-            <input type="text" id="edi-potential-mainPer-2"
-                   th:field="*{item2.ediPotentialInformation.mainPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-subPer-2">부스탯 % : </label>
-            <input type="text" id="edi-potential-subPer-2"
-                   th:field="*{item2.ediPotentialInformation.subPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-allPer-2">올스탯 % : </label>
-            <input type="text" id="edi-potential-allPer-2"
-                   th:field="*{item2.ediPotentialInformation.allPer}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-main-2">주스탯 : </label>
-            <input type="text" id="edi-potential-main-2"
-                   th:field="*{item2.ediPotentialInformation.main}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-sub-2">부스탯 : </label>
-            <input type="text" id="edi-potential-sub-2"
-                   th:field="*{item2.ediPotentialInformation.sub}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-attack-2">공격력 / 마력 : </label>
-            <input type="text" id="edi-potential-attack-2"
-                   th:field="*{item2.ediPotentialInformation.attack}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-critical-2">크리티컬 데미지 % : </label>
-            <input type="text" id="edi-potential-critical-2"
-                   th:field="*{item2.ediPotentialInformation.critical}" min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="edi-potential-level-2">9레벨당 주스탯 + : </label>
-            <input type="text" id="edi-potential-level-2"
-                   th:field="*{item2.ediPotentialInformation.level}" min="0" max="9999">
-          </div>
-        </div>
-
-        <!-- 다섯 번째 작은 상자 -->
-        <div class="small-box-2">
-          <!-- 입력 상자 -->
-          <div class="input-container">
-            <label for="price-2">구매가격:</label>
-            <input type="text" id="price-2" th:field="*{item2.price.price}" min="0"
-                   max="999999999999">
-          </div>
-          <!-- 다른 입력 상자들도 추가할 수 있음 -->
-        </div>
+        <button class="submit-button" name="calculate" th:value="1">계산하기
+        </button>
       </div>
 
-      <button class="submit-button" name="calculate" th:value="2">계산하기
-      </button>
+
+      <!-- 두 번째 큰 직사각형 상자 -->
+      <div class="large-box-2">
+        <div class="small-box-container-title-2">구매할 장비 [장비 B]</div>
+        <div class="small-box-container">
+          <!-- 첫번 째 작은 사각형 상자 -->
+          <div class="small-box-2">
+            <!-- 입력 상자 -->
+            <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
+            <div class="input-container">
+              <label for="equip-main-2">주스탯 : </label>
+              <input type="text" id="equip-main-2" th:field="*{item2.equipInformation.main}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-sub-2">부스탯 : </label>
+              <input type="text" id="equip-sub-2" th:field="*{item2.equipInformation.sub}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-attack-2">공격력/마력 : </label>
+              <input type="text" id="equip-attack-2" th:field="*{item2.equipInformation.attack}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-all-2">올스탯 % : </label>
+              <input type="text" id="equip-all-2" th:field="*{item2.equipInformation.allPer}"
+                     min="0"
+                     max="9999">
+            </div>
+          </div>
+
+          <!-- 두 번째 작은 상자 -->
+          <div class="small-box-2">
+            <!-- 입력 상자 -->
+            <h3>추가되는 세트 옵션</h3>
+            <div class="input-container">
+              <label for="change-main-2">주스탯 : </label>
+              <input type="text" id="change-main-2" th:field="*{item2.changeInformation.main}"
+                     min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-sub-2">부스탯 : </label>
+              <input type="text" id="change-sub-2" th:field="*{item2.changeInformation.sub}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-attack-2">공격력 / 마력 : </label>
+              <input type="text" id="change-attack-2" th:field="*{item2.changeInformation.attack}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-boss-2">보스 공격력 % : </label>
+              <input type="text" id="change-boss-2" th:field="*{item2.changeInformation.boss}"
+                     min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="change-critical-2">크리티컬 데미지 % : </label>
+              <input type="text" id="change-critical-2"
+                     th:field="*{item2.changeInformation.critical}"
+                     min="0" max="9999">
+            </div>
+          </div>
+
+          <!-- 세 번째 작은 상자 -->
+          <div class="small-box-2">
+            <!-- 입력 상자 -->
+            <h3>잠재능력</h3>
+            <div class="input-container">
+              <label for="potential-mainPer-2">주스탯 % : </label>
+              <input type="text" id="potential-mainPer-2"
+                     th:field="*{item2.potentialInformation.mainPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-subPer-2">부스탯 % : </label>
+              <input type="text" id="potential-subPer-2"
+                     th:field="*{item2.potentialInformation.subPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-allPer-2">올스탯 % : </label>
+              <input type="text" id="potential-allPer-2"
+                     th:field="*{item2.potentialInformation.allPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-main-2">주스탯 : </label>
+              <input type="text" id="potential-main-2" th:field="*{item2.potentialInformation.main}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-sub-2">부스탯 : </label>
+              <input type="text" id="potential-sub-2" th:field="*{item2.potentialInformation.sub}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="potential-critical-2">크리티컬 데미지 % : </label>
+              <input type="text" id="potential-critical-2"
+                     th:field="*{item2.potentialInformation.critical}" min="0" max="9999">
+            </div>
+          </div>
+
+          <!-- 네 번째 작은 상자 -->
+          <div class="small-box-2">
+            <!-- 입력 상자 -->
+            <h3>에디셔널 잠재능력</h3>
+            <div class="input-container">
+              <label for="edi-potential-mainPer-2">주스탯 % : </label>
+              <input type="text" id="edi-potential-mainPer-2"
+                     th:field="*{item2.ediPotentialInformation.mainPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-subPer-2">부스탯 % : </label>
+              <input type="text" id="edi-potential-subPer-2"
+                     th:field="*{item2.ediPotentialInformation.subPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-allPer-2">올스탯 % : </label>
+              <input type="text" id="edi-potential-allPer-2"
+                     th:field="*{item2.ediPotentialInformation.allPer}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-main-2">주스탯 : </label>
+              <input type="text" id="edi-potential-main-2"
+                     th:field="*{item2.ediPotentialInformation.main}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-sub-2">부스탯 : </label>
+              <input type="text" id="edi-potential-sub-2"
+                     th:field="*{item2.ediPotentialInformation.sub}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-attack-2">공격력 / 마력 : </label>
+              <input type="text" id="edi-potential-attack-2"
+                     th:field="*{item2.ediPotentialInformation.attack}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-critical-2">크리티컬 데미지 % : </label>
+              <input type="text" id="edi-potential-critical-2"
+                     th:field="*{item2.ediPotentialInformation.critical}" min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="edi-potential-level-2">9레벨당 주스탯 + : </label>
+              <input type="text" id="edi-potential-level-2"
+                     th:field="*{item2.ediPotentialInformation.level}" min="0" max="9999">
+            </div>
+          </div>
+
+          <!-- 다섯 번째 작은 상자 -->
+          <div class="small-box-2">
+            <!-- 입력 상자 -->
+            <div class="input-container">
+              <label for="price-2">구매가격:</label>
+              <input type="text" id="price-2" th:field="*{item2.price.price}" min="0"
+                     max="999999999999">
+            </div>
+            <!-- 다른 입력 상자들도 추가할 수 있음 -->
+          </div>
+        </div>
+
+        <button class="submit-button" name="calculate" th:value="2">계산하기
+        </button>
+      </div>
+    </div>
+    <div class="large-box-container-1">
+
     </div>
   </div>
+  <div class="largest-box">
+    <div class="result-box">
+      <div class="result">
+        <li>총 주스탯 효율
+          <ul>= 약 <input type="text" id="total-stats-1"
+                         th:field="*{efficientResult.result1.allStatPer}" readonly/> %
+          </ul>
+        </li>
+        <li>주스탯 % 당 가격
+          <ul>= 약 <input type="text" id="price-percentage-1"
+                         th:field="*{efficientResult.result1.priceForMainPer}" readonly/> 억
+          </ul>
+        </li>
+        <li>억당 주스탯 효율
+          <ul>= 약 <input type="text" id="efficient-price-1"
+                         th:field="*{efficientResult.result1.mainPerForPrice}" readonly/> %
+          </ul>
+        </li>
+      </div>
 
-  <div class="result-box">
-    <div class="result">
-      <li>총 주스탯 효율
-        <ul>= 약 <input type="text" id="total-stats-1"
-                       th:field="*{efficientResult.result1.allStatPer}" readonly/> %
-        </ul>
-      </li>
-      <li>주스탯 % 당 가격
-        <ul>= 약 <input type="text" id="price-percentage-1"
-                       th:field="*{efficientResult.result1.priceForMainPer}" readonly/> 억
-        </ul>
-      </li>
-      <li>억당 주스탯 효율
-        <ul>= 약 <input type="text" id="efficient-price-1"
-                       th:field="*{efficientResult.result1.mainPerForPrice}" readonly/> %
-        </ul>
-      </li>
-    </div>
-
-    <div class="result-2">
-      <li>총 주스탯 효율
-        <ul>= 약 <input type="text" id="total-stats-2"
-                       th:field="*{efficientResult.result2.allStatPer}" readonly/> %
-        </ul>
-      </li>
-      <li>주스탯 % 당 가격
-        <ul>= 약 <input type="text" id="price-percentage-2"
-                       th:field="*{efficientResult.result2.priceForMainPer}" readonly/> 억
-        </ul>
-      </li>
-      <li>억당 주스탯 효율
-        <ul>= 약 <input type="text" id="efficient-price-2"
-                       th:field="*{efficientResult.result2.mainPerForPrice}" readonly/> %
-        </ul>
-      </li>
+      <div class="result-2">
+        <li>총 주스탯 효율
+          <ul>= 약 <input type="text" id="total-stats-2"
+                         th:field="*{efficientResult.result2.allStatPer}" readonly/> %
+          </ul>
+        </li>
+        <li>주스탯 % 당 가격
+          <ul>= 약 <input type="text" id="price-percentage-2"
+                         th:field="*{efficientResult.result2.priceForMainPer}" readonly/> 억
+          </ul>
+        </li>
+        <li>억당 주스탯 효율
+          <ul>= 약 <input type="text" id="efficient-price-2"
+                         th:field="*{efficientResult.result2.mainPerForPrice}" readonly/> %
+          </ul>
+        </li>
+      </div>
     </div>
   </div>
 </form>
@@ -888,7 +916,8 @@
       // 입력된 값이 9999를 초과하는지, 문자인지, 음수인지 확인합니다.
       if (this.id === 'price-1' || this.id === 'price-2') {
         ;
-      } else if (this.value==="" ||parseInt(this.value) > 9999 || isNaN(this.value) || parseInt(this.value) < 0) {
+      } else if (this.value === "" || parseInt(this.value) > 9999 || isNaN(this.value) || parseInt(
+          this.value) < 0) {
         // 입력된 값이 조건을 만족하면 값을 0으로 설정합니다.
         this.value = 0;
         alert("0 이상 9999 이하의 숫자만 입력할 수 있습니다.");
@@ -900,7 +929,7 @@
   const purchasePriceInput = document.getElementById('price-1');
   purchasePriceInput.addEventListener('input', function () {
     // 입력된 값이 0보다 작거나 NaN인 경우 0으로 설정합니다.
-    if (this.value==="" || parseInt(this.value) < 0 || isNaN(this.value)) {
+    if (this.value === "" || parseInt(this.value) < 0 || isNaN(this.value)) {
       this.value = 0;
     }
     // 입력된 값이 999999999999를 초과하는지 확인하고, 초과하는 경우 값을 제한합니다.
@@ -912,7 +941,7 @@
   const purchasePriceInput2 = document.getElementById('price-2');
   purchasePriceInput2.addEventListener('input', function () {
     // 입력된 값이 0보다 작거나 NaN인 경우 0으로 설정합니다.
-    if (this.value===""||parseInt(this.value) < 0 || isNaN(this.value)) {
+    if (this.value === "" || parseInt(this.value) < 0 || isNaN(this.value)) {
       this.value = 0;
     }
     // 입력된 값이 999999999999를 초과하는지 확인하고, 초과하는 경우 값을 제한합니다.

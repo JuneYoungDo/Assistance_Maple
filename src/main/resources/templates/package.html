@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <meta charset="UTF-8">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
+  <script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7922346678878671"
           crossorigin="anonymous"></script>
   <link rel="shortcut icon" href="#">
   <title>메이플 가성비 계산기</title>
@@ -133,10 +134,19 @@
       color: black;
     }
 
+    .largest-box {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .large-box-container-1 {
+      width: 50%;
+    }
+
     .large-box-container {
       display: flex;
       flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
-      margin: 0 36vw;
+      /*margin: 0 36vw;*/
     }
 
     .large-box-1 {
@@ -220,6 +230,7 @@
     }
 
     .result-box {
+      width: 100%;
       display: flex;
       margin: 0 36vw;
     }
@@ -365,55 +376,66 @@
     패키지 계산기
   </div>
   <!-- 상자들을 포함하는 컨테이너 -->
-  <div class="large-box-container">
-    <!-- 첫 번째 큰 직사각형 상자 -->
-    <div class="large-box-1">
-      <div class="small-box-container">
-        <!-- 첫번 째 작은 사각형 상자 -->
-        <div class="small-box">
-          <!-- 입력 상자 -->
-          <h3>바우처 = 패키지 내의 보조 지원 상품</h3>
-          <div class="input-container">
-            <label for="equip-main-1">패키지 가격(메포) : </label>
-            <input type="text" id="equip-main-1" th:field="*{packagePrice}" min="0"
-                   max="9999">
+  <div class="largest-box">
+    <div class="large-box-container-1">
+
+    </div>
+
+    <div class="large-box-container">
+      <!-- 첫 번째 큰 직사각형 상자 -->
+      <div class="large-box-1">
+        <div class="small-box-container">
+          <!-- 첫번 째 작은 사각형 상자 -->
+          <div class="small-box">
+            <!-- 입력 상자 -->
+            <h3>바우처 = 패키지 내의 보조 지원 상품</h3>
+            <div class="input-container">
+              <label for="equip-main-1">패키지 가격(메포) : </label>
+              <input type="text" id="equip-main-1" th:field="*{packagePrice}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-sub-1">메포시세(1억당) : </label>
+              <input type="text" id="equip-sub-1" th:field="*{pointPrice}" min="0"
+                     max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-attack-1">바우처 가격(메소) : </label>
+              <input type="text" id="equip-attack-1" th:field="*{voucherPrice}"
+                     min="0" max="9999">
+            </div>
+            <div class="input-container">
+              <label for="equip-all-1">패키지 내 아이템 개수 : </label>
+              <input type="text" id="equip-all-1" th:field="*{itemNum}" min="0"
+                     max="9999">
+            </div>
           </div>
-          <div class="input-container">
-            <label for="equip-sub-1">메포시세(1억당) : </label>
-            <input type="text" id="equip-sub-1" th:field="*{pointPrice}" min="0"
-                   max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-attack-1">바우처 가격(메소) : </label>
-            <input type="text" id="equip-attack-1" th:field="*{voucherPrice}"
-                   min="0" max="9999">
-          </div>
-          <div class="input-container">
-            <label for="equip-all-1">패키지 내 아이템 개수 : </label>
-            <input type="text" id="equip-all-1" th:field="*{itemNum}" min="0"
-                   max="9999">
-          </div>
+
+          <button class="submit-button" name="calculate" th:value="1">계산하기
+          </button>
         </div>
 
-        <button class="submit-button" name="calculate" th:value="1">계산하기
-        </button>
       </div>
+    </div>
+    <div class="large-box-container-1">
 
     </div>
   </div>
 
-  <div class="result-box">
-    <div class="result">
-      <li>패키지 내 물품 개당 가격
-        <ul>= 약 <input type="text" id="total-stats-1"
-                       th:field="*{result}" readonly/> 메소
-        </ul>
-      </li>
-      <li class="result-text">
-        경매장 물품 가격이 위 가격보다 더 싸다면 경매장을 이용하는 것이 효율적
-      </li>
-    </div>
+  <div class="largest-box">
+    <div class="result-box">
+      <div class="result">
+        <li>패키지 내 물품 개당 가격
+          <ul>= 약 <input type="text" id="total-stats-1"
+                         th:field="*{result}" readonly/> 메소
+          </ul>
+        </li>
+        <li class="result-text">
+          경매장 물품 가격이 위 가격보다 더 싸다면 경매장을 이용하는 것이 효율적
+        </li>
+      </div>
 
+    </div>
   </div>
 </form>
 
