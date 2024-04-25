@@ -59,4 +59,9 @@ public class MainController {
 
         return "package";
     }
+
+    @GetMapping("/ads.txt")
+    public String ads() {
+        return "ads.txt";
+    }
 }
