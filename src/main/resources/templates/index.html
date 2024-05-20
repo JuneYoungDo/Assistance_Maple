@@ -26,7 +26,7 @@
       align-items: center; /* 수직 가운데 정렬 */
       box-shadow: 0 0.2vh 0.4vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
-      margin-bottom: 5vw;
+      margin-bottom: 1vw;
       font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
     }
@@ -75,7 +75,7 @@
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
       font-size: 1rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
-      margin-top: 6vw;
+      margin-top: 1vw;
     }
 
     .footer-text {
@@ -365,6 +365,12 @@
       font-weight: 500;
     }
 
+    .banner-width {
+      margin: 0 auto;
+      padding: 4vh 18vw;
+      align-items: center;
+    }
+
     @media (max-width: 768px) {
       nav {
         padding: 3vh 5vw; /* 위아래와 좌우 padding 값을 조정 */
@@ -478,8 +484,12 @@
     <li><a th:href="@{/package}"> 패키지 </a></li>
   </ul>
 </nav>
-<div>
-
+<div class="banner-width">
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit = "DAN-jdGMhDOSFtn4IBFh"
+       data-ad-width = "320"
+       data-ad-height = "100"></ins>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
 
 <form method="get" th:action="@{/calculate}" th:object="${itemInformation}">
@@ -527,6 +537,11 @@
   <div class="largest-box">
 
     <div class="large-box-container-1">
+      <ins class="kakao_ad_area" style="display:none;"
+           data-ad-unit = "DAN-XcBwpEkEr4mAlwLX"
+           data-ad-width = "160"
+           data-ad-height = "600"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
     <!-- 상자들을 포함하는 컨테이너 -->
@@ -860,7 +875,11 @@
     </div>
 
     <div class="large-box-container-1">
-
+      <ins class="kakao_ad_area" style="display:none;"
+           data-ad-unit = "DAN-U9NKOA46zkLZT1Zw"
+           data-ad-width = "160"
+           data-ad-height = "600"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
   </div>
@@ -905,10 +924,18 @@
   </div>
 </form>
 
+<div class="banner-width">
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit = "DAN-AXmEYhdyARaUXPYH"
+       data-ad-width = "320"
+       data-ad-height = "100"></ins>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+</div>
+
 
 <footer>
   <div>
-    <span class="footer-text">Recent Update: 2024.04.18 21:21</span><br/>
+    <span class="footer-text">Recent Update: 2024.05.20 20:21</span><br/>
     <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
   </div>
 </footer>
