@@ -1,9 +1,8 @@
-package com.effiective.maple.domain.controller;
+package com.effective.maple.domain.controller;
 
-import com.effiective.maple.domain.dto.RequestDto.ItemInformation;
-import com.effiective.maple.domain.dto.RequestDto.PackageItem;
-import com.effiective.maple.domain.dto.ResponseDto.EfficientResult;
-import com.effiective.maple.domain.usecase.MainUseCase;
+import com.effective.maple.domain.dto.RequestDto.ItemInformation;
+import com.effective.maple.domain.dto.ResponseDto.EfficientResult;
+import com.effective.maple.domain.usecase.MainUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +15,6 @@ public class MainController {
 
     private final MainUseCase mainUseCase;
 
-    /**
-     * 메인 화면 가져오기 [GET] /
-     */
     @GetMapping("/")
     public String getMainPage(Model model) {
         ItemInformation itemInformation = new ItemInformation();
@@ -39,25 +35,6 @@ public class MainController {
         model.addAttribute("itemInformation", result);
 
         return "index";
-    }
-
-    @GetMapping("/package")
-    public String packagePage(Model model) {
-        PackageItem packageItem = mainUseCase.getInitPackageItem();
-        model.addAttribute("packageItem", packageItem);
-
-        return "package";
-    }
-
-    @GetMapping("/package/calculate")
-    public String packageCalculate(PackageItem packageItem,Model model) {
-        String price = mainUseCase.getPackageResult(packageItem);
-        PackageItem result;
-        result = packageItem;
-        result.setResult(price);
-        model.addAttribute("packageItem", result);
-
-        return "package";
     }
 
     @GetMapping("/ads.txt")

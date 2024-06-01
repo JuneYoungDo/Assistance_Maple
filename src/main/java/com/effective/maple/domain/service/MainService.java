@@ -1,24 +1,23 @@
-package com.effiective.maple.domain.service;
+package com.effective.maple.domain.service;
 
-import com.effiective.maple.domain.dto.RequestDto.ChangeInformation;
-import com.effiective.maple.domain.dto.RequestDto.EdiPotentialInformation;
-import com.effiective.maple.domain.dto.RequestDto.EquipInformation;
-import com.effiective.maple.domain.dto.RequestDto.ItemInformation;
-import com.effiective.maple.domain.dto.RequestDto.OptimizeStat;
-import com.effiective.maple.domain.dto.RequestDto.PackageItem;
-import com.effiective.maple.domain.dto.RequestDto.PotentialInformation;
-import com.effiective.maple.domain.dto.ResponseDto.Result;
-import com.effiective.maple.domain.usecase.MainUseCase;
+import com.effective.maple.domain.dto.RequestDto.ChangeInformation;
+import com.effective.maple.domain.dto.RequestDto.EdiPotentialInformation;
+import com.effective.maple.domain.dto.RequestDto.EquipInformation;
+import com.effective.maple.domain.dto.RequestDto.ItemInformation;
+import com.effective.maple.domain.dto.RequestDto.OptimizeStat;
+import com.effective.maple.domain.dto.RequestDto.PotentialInformation;
+import com.effective.maple.domain.usecase.MainUseCase;
+import com.effective.maple.domain.dto.ResponseDto.Result;
 import java.text.DecimalFormat;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MainService implements MainUseCase {
 
-
     @Override
     public OptimizeStat getInitOptimize() {
         OptimizeStat optimizeStat = new OptimizeStat();
+        optimizeStat.setMain(1);
         optimizeStat.setLevel(0);
         optimizeStat.setAttack(4);
         optimizeStat.setSub(0.1);
@@ -55,27 +54,6 @@ public class MainService implements MainUseCase {
         }
 
         return itemInformation;
-    }
-
-    @Override
-    public String getPackageResult(PackageItem packageItem) {
-        Long voucherPriceForWon = packageItem.getVoucherPrice()/100000000 * packageItem.getPointPrice();
-        Long noVoucherPackagePrice = packageItem.getPackagePrice() * 100000000 - voucherPriceForWon * 100000000;
-        Long packagePriceForMeso = noVoucherPackagePrice / packageItem.getPointPrice();
-        Long result = packagePriceForMeso / packageItem.getItemNum();
-
-        String resultToString = DecimalFormat.getInstance().format(result);
-
-
-        return resultToString;
-    }
-
-    @Override
-    public PackageItem getInitPackageItem() {
-        PackageItem packageItem = new PackageItem(29900L,3000L,200000000L,15L,"");
-        packageItem.setResult(getPackageResult(packageItem));
-
-        return packageItem;
     }
 
     private double getMainStat(ItemInformation itemInformation, int type) {
@@ -154,7 +132,6 @@ public class MainService implements MainUseCase {
 
     private String formatDouble(double number) {
         DecimalFormat df = new DecimalFormat("#.###");
-        String formattedNumber = df.format(number);
-        return formattedNumber;
+        return df.format(number);
     }
 }

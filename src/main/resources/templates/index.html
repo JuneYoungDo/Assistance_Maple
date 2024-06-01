@@ -7,26 +7,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="ZWg0BZHEiUuSCMsLYJw1QjMPpSvNBzOt6lk__JoRUzg" />
-  <link rel="shortcut icon" href="#">
+  <link rel="icon" href="/images/favicon.png"/>
+  <link rel="apple-touch-icon" href="images/favicon.png"/>
   <title>메이플 가성비 계산기</title>
   <style>
     /* CSS 스타일링 */
     body {
+      min-width: 800px;
       margin: 0; /* body 요소의 기본 마진을 없앰 */
       padding: 0; /* body 요소의 기본 패딩을 없앰 */
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴을 둥근 형식으로 변경 */
       background: #FFF5E0;
+      overflow-x: auto;
     }
 
     nav {
       background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-      padding: 1.5vh 2vw; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 20px 50px; /* 위아래와 좌우 padding 값을 조정 */
       display: flex;
       justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
       align-items: center; /* 수직 가운데 정렬 */
       box-shadow: 0 0.2vh 0.4vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
-      margin-bottom: 1vw;
+      margin-bottom: 10px;
       font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
     }
@@ -44,15 +47,15 @@
     }
 
     nav ul li {
-      margin-left: 5vw; /* 각 메뉴 사이의 간격을 늘림 */
+      margin-left: 100px; /* 각 메뉴 사이의 간격을 늘림 */
     }
 
     nav ul li:first-child {
-      margin-left: 0.1vw; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+      margin-left: 10px; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
     }
 
     nav ul li:last-child {
-      margin-right: 0.3vw;
+      margin-right: 10px;
     }
 
     nav ul li a {
@@ -67,7 +70,7 @@
 
     footer {
       background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-      padding: 1.5vh 3vw; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 20px 50px; /* 위아래와 좌우 padding 값을 조정 */
       display: block;
       justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
       align-items: center; /* 수직 가운데 정렬 */
@@ -75,29 +78,35 @@
       font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
       font-size: 1rem; /* 로고의 글자 크기를 키움 */
       font-weight: bold; /* 로고 글자 굵게 설정 */
-      margin-top: 1vw;
+      margin-top: 10px;
     }
 
     .footer-text {
       float: right;
     }
 
+    .parent-container {
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+
     .level {
       font-size: x-large;
       font-weight: 500;
-      margin-left: 1vw;
+      margin-left: 20px;
     }
 
     .optimize {
       font-size: large;
       font-weight: 500;
-      margin-left: 1vw;
+      margin-left: 30px;
       text-align: center;
     }
 
     .level input {
-      width: 4vw;
-      height: 2.5vh;
+      width: 100px;
+      height: 50px;
       border-radius: 10px;
       border: 0;
       text-align: center;
@@ -106,8 +115,8 @@
     }
 
     .optimize input {
-      width: 3vw;
-      height: 1.5vh;
+      width: 90px;
+      height: 30px;
       border-radius: 10px;
       border: 0;
       text-align: center;
@@ -116,13 +125,12 @@
     }
 
     .large-box-container-title {
+      overflow-x: auto;
       font-size: xx-large;
-      padding: 1.34vh 0.6vw; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 15px 10px; /* 위아래와 좌우 padding 값을 조정 */
       font-weight: 700;
       display: flex;
-      margin-bottom: 0.26vh; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
-      margin-left: 18vw; /* 왼쪽에 빈 공간을 추가 */
-      margin-right: 18vw; /* 오른쪽에 빈 공간을 추가 */
+      margin-bottom: 5px; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
       color: black;
     }
 
@@ -133,18 +141,18 @@
 
     .tooltip .tooltip-text {
       visibility: hidden;
-      width: 29vw;
+      width: 500px;
       text-align: left;
       border: 2px solid #FFDAB9;
       background: white;
       color: black;
       border-radius: 6px;
-      padding: 0.1vw;
+      padding: 5px;
       position: absolute;
       z-index: 1;
       top: 50%;
       left: 300%;
-      margin-left: -2.3vw;
+      margin-left: -40px;
       opacity: 0;
       transition: opacity 0.3s;
       font-size: 14px;
@@ -155,7 +163,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      margin-left: -0.15vw;
+      margin-left: -40px;
       border-width: 5px;
       border-style: solid;
       border-color: #000 transparent transparent transparent;
@@ -169,52 +177,53 @@
 
     .largest-box {
       display: flex;
-      justify-content: space-between;
+      /*justify-content: space-between;*/
+      justify-content: center;
+      overflow-x: auto;
     }
 
-    .large-box-container-1 {
-      width: 50%;
+    .side_banner {
+      width: 330px;
       text-align: center;
-      margin: 15px 0;
+      margin: 15px;
+      overflow-x: auto;
     }
 
     .large-box-container {
       display: flex;
-      justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
-      /* 좌우 여백을 조절 */
-      flex-wrap: wrap; /* 작은 상자가 넘칠 때 다음 줄로 이동하도록 설정 */
-      /* 왼쪽에 빈 공간을 추가 */
-      /* 오른쪽에 빈 공간을 추가 */
-      /*margin: 0 18vw;*/
+      overflow-x: auto;
     }
 
     .large-box-1 {
-      width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
+      width: 800px; /* 페이지의 절반을 차지하도록 크기 조정 */
       overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
-      margin-bottom: 1.5vh;
+      margin-bottom: 10px;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
       border-radius: 10px;
       background-color: #ffffff;
       border: none;
-      padding: 0.6vh 0.04vw 0.6vh 0.4vw;
+      padding: 5px 5px;
+      margin-right: 20px;
+      overflow-x: auto;
     }
 
     .large-box-2 {
-      width: 49%; /* 페이지의 절반을 차지하도록 크기 조정 */
+      width: 800px; /* 페이지의 절반을 차지하도록 크기 조정 */
       overflow: auto; /* 작은 상자 안의 내용이 범위를 벗어나면 스크롤이 생기도록 설정 */
-      padding: 0.6vh 0.04vw 0.6vh 0.4vw;
-      margin-bottom: 1.5vh; /* 각 큰 상자 사이의 간격을 추가 */
+      padding: 5px 5px;
+      margin-bottom: 10px;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       position: relative; /* 제출 버튼 위치 설정을 위해 상대적 위치 설정 */
       border-radius: 10px;
       background-color: #FFDAB9;
       border: none;
+      overflow-x: auto;
     }
 
     .small-box-container-title-1 {
-      padding: 0.9vh 0.6vw;
-      margin-left: 0.4vw;
+      padding: 10px 10px;
+      margin-left: 10px;
       font-weight: 600;
       background: linear-gradient(to left, #FFFFFF 30%, #FFDAB9 100%);
       border-radius: 10px;
@@ -222,27 +231,27 @@
     }
 
     .small-box-container-title-2 {
-      padding: 0.9vh 0.6vw;
+      padding: 10px 10px;
+      margin-right: 10px;
       font-weight: 600;
       background: linear-gradient(to left, #ffffff 30%, #FFDAB9 100%);
       border-radius: 10px;
       color: #FF5733;
       text-align: right;
-      margin-right: 0.7vw;
     }
 
     .small-box-container {
       display: flex;
       flex-wrap: wrap; /* 작은 상자를 한 줄에 넘치면 다음 줄로 넘어가도록 설정 */
-      gap: 0.4vw; /* 작은 상자 사이의 간격을 설정 */
-      padding: 0.4vw; /* 작은 상자들 사이의 간격을 조절 */
+      gap: 20px; /* 작은 상자 사이의 간격을 설정 */
+      padding: 15px;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
     }
 
     .small-box {
       width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
       border: 2px solid #FFDAB9;
-      padding: 0.5vh 0.7vw;
+      padding: 4px 10px;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       border-radius: 10px;
       display: flex;
@@ -255,13 +264,13 @@
     }
 
     .small-box div {
-      margin-bottom: 1vh;
+      margin-bottom: 15px;
     }
 
     .small-box-2 {
       width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
       border: 2px solid #ffffff;
-      padding: 0.5vh 0.7vw;
+      padding: 4px 10px;
       box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
       border-radius: 10px;
       display: flex;
@@ -274,7 +283,7 @@
     }
 
     .small-box-2 div {
-      margin-bottom: 1vh;
+      margin-bottom: 15px;
     }
 
     .input-container {
@@ -285,9 +294,9 @@
     }
 
     .input-container label {
-      margin-right: 0.4vw;
+      margin-right: 30px;
       font-size: medium; /* 제목의 크기를 줄임 */
-      width: 8vw;
+      width: 140px;
     }
 
     .input-container input {
@@ -296,15 +305,15 @@
       text-align: right;
       border-radius: 5px; /* 테두리를 둥글게 설정 */
       border: 1px solid #ccc; /* 테두리 추가 */
-      padding: 0.45vh; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+      padding: 8px; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
     }
 
     .submit-button {
       position: absolute; /* 제출 버튼의 위치 설정 */
-      bottom: 1vh;
-      right: 0.8vw;
+      bottom: 10px;
+      right: 35px;
       font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
-      padding: 0.7vw; /* 버튼 내부의 여백 설정 */
+      padding: 20px; /* 버튼 내부의 여백 설정 */
       border-radius: 8px;
       border: none; /* 테두리 없애기 */
       background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
@@ -319,15 +328,15 @@
     .result-box {
       display: flex;
       justify-content: space-between; /* 두 개의 상자를 좌우로 배치 */
-      margin: 0 31.2vw;
-      gap: 1vw; /* 작은 상자 사이의 간격을 설정 */
+      /*margin: 0 31.2vw;*/
+      gap: 20px; /* 작은 상자 사이의 간격을 설정 */
+      overflow-x: hidden;
     }
 
     .result {
-      width: 12vw;
-      padding: 0.6vh 0 0 0.4vw;
+      width: 360px;
+      padding: 5px 2px;
       border-radius: 10px;
-      margin-left: 6vw;
       background-color: #ffffff;
       border: none;
     }
@@ -340,120 +349,89 @@
       border-radius: 5px; /* 테두리를 둥글게 설정 */
       border: 2px solid #ccc; /* 테두리 추가 */
       background-color: transparent;
-      padding: 0.4vh; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
+      padding: 8px; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
       font-size: large;
       font-weight: 500;
-      margin: 0 0.1vw 0 0.4vw;
     }
 
     .result li {
-      margin-left: 0.4vw;
+      margin-left: 20px;
       font-weight: 500;
     }
 
     .result-2 {
-      width: 12vw;
-      padding: 0.6vh 0 0 0.4vw;
+      width: 360px;
+      padding: 5px 2px;
       border-radius: 10px;
-      margin-right: 6vw;
       background-color: #FFDAB9;
       border: none;
     }
 
     .result-2 li {
-      margin-left: 0.4vw;
+      margin-left: 20px;
       font-weight: 500;
     }
 
     .banner-width {
       margin: 0 auto;
-      padding: 4vh 18vw;
       align-items: center;
+      padding: 4vh 18vw;
     }
 
-    @media (max-width: 768px) {
+    @media only screen and (max-width: 767px) {
       nav {
-        padding: 3vh 5vw; /* 위아래와 좌우 padding 값을 조정 */
-        flex-direction: column; /* 네비게이션 메뉴를 세로로 배치 */
-        align-items: flex-start; /* 메뉴 항목을 왼쪽으로 정렬 */
-        margin-bottom: 5vw;
+        padding: 10px 20px;
       }
 
       .logo a {
-        font-size: 1.2rem; /* 로고의 글자 크기를 줄임 */
+        font-size: 1.2rem;
+      }
+
+      nav ul {
+        flex-direction: column; /* 모바일에서는 메뉴를 세로로 나열 */
       }
 
       nav ul li {
-        margin: 1vh 0; /* 각 메뉴 사이의 간격을 조절 */
+        margin-left: 0; /* 메뉴 간격 초기화 */
+        margin-bottom: 10px; /* 각 메뉴 항목 사이에 간격 추가 */
       }
 
-      nav ul li:first-child {
-        margin-left: 0; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+      .level {
+        font-size: large;
       }
 
-      nav ul li:last-child {
-        margin-right: 0;
+      .submit-button {
+        padding: 15px;
+        font-size: large;
       }
 
       .large-box-container-title {
-        font-size: x-large; /* 큰 상자 컨테이너의 제목 글자 크기를 줄임 */
-        margin: 2vh 0; /* 제목 위아래에 여백 추가 */
-        margin-left: 5vw; /* 왼쪽에 빈 공간을 추가 */
-        margin-right: 5vw; /* 오른쪽에 빈 공간을 추가 */
-      }
-
-      .large-box-container {
-        margin: 0; /* 좌우 여백을 초기화 */
+        font-size: large;
       }
 
       .large-box-1,
       .large-box-2 {
-        width: 100%; /* 전체 너비를 차지하도록 설정 */
-        margin-bottom: 5vw; /* 각 큰 상자 사이의 간격을 추가 */
-      }
-
-      .small-box-container-title-1,
-      .small-box-container-title-2 {
-        margin-left: 5vw; /* 왼쪽에 빈 공간을 추가 */
-        margin-right: 5vw; /* 오른쪽에 빈 공간을 추가 */
-      }
-
-      .small-box-container {
-        padding: 2vh 0; /* 작은 상자 컨테이너 위아래에 여백 추가 */
-      }
-
-      .small-box,
-      .small-box-2 {
-        width: 100%; /* 전체 너비를 차지하도록 설정 */
-        margin-bottom: 5vw; /* 각 작은 상자 사이의 간격을 추가 */
-      }
-
-      .input-container label {
-        width: 50%; /* 레이블의 너비를 100%로 설정하여 풀 너비로 확장 */
-        margin-right: 0; /* 레이블 오른쪽 마진 제거 */
-        margin-bottom: 1vh; /* 각 입력 필드 사이의 간격을 추가 */
-      }
-
-      .input-container input {
-        width: 100%; /* 입력 상자의 너비를 100%로 설정하여 풀 너비로 확장 */
-        margin-bottom: 2vh; /* 각 입력 상자 아래 여백 추가 */
-      }
-
-      .submit-button {
-        position: static; /* 제출 버튼의 위치를 정적으로 설정하여 텍스트 흐름에 따라 배치 */
-        width: 100%; /* 버튼의 너비를 100%로 설정하여 풀 너비로 확장 */
-        margin-bottom: 2vh; /* 제출 버튼 위아래 여백 추가 */
-        right: 0; /* 오른쪽 여백 제거 */
+        width: 100%;
+        margin-right: 0;
       }
 
       .result-box {
-        margin: 0; /* 좌우 여백을 초기화 */
+        flex-direction: column;
+        gap: 10px;
       }
 
       .result,
       .result-2 {
-        width: 100%; /* 전체 너비를 차지하도록 설정 */
-        margin-bottom: 5vw; /* 각 결과 상자 사이의 간격을 추가 */
+        width: 100%;
+      }
+
+      .input-container label {
+        width: auto;
+        margin-right: 10px;
+      }
+
+      .banner-width {
+        padding: 20px;
       }
     }
 
@@ -468,18 +446,24 @@
       <div class="tooltip">&nbsp;
         <i class="fas fa-question-circle"></i>
         <span class="tooltip-text">
-      우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다. <br/><br/>
-      아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. <br/><br/>
-      그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
-      메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다.<br/><br/>
-      추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
-      감사합니다.
-      </span>
+          우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다.<br/><br/>
+
+          아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. 또한, 장비 교체 우선순위를 제공하여 사용자들이 효율적으로 장비를 업그레이드할 수 있도록 안내합니다.<br/><br/>
+
+          그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
+
+          메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다. 이를 통해 사용자들이 초기 단계에서 효율적인 아이템 선택과 장비 교체를 할 수 있도록 지원합니다.<br/><br/>
+
+          추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
+
+          감사합니다.
+        </span>
       </div>
     </li>
   </ul>
   <ul>
     <!--    <li><a href="#"> 무기류 </a></li> &lt;!&ndash; 메뉴1 추가 &ndash;&gt;-->
+    <li><a th:href="@{/search}"> 캐릭터 </a></li> <!-- 메뉴1 추가 -->
     <li><a th:href="@{/}"> 방어구 </a></li> <!-- 메뉴1 추가 -->
     <li><a th:href="@{/package}"> 패키지 </a></li>
   </ul>
@@ -493,50 +477,55 @@
 </div>
 
 <form method="get" th:action="@{/calculate}" th:object="${itemInformation}">
-  <div class="large-box-container-title">
-    방어구
-    <div class="level">
-      Lv.
-      <input type="text" id="level" th:field="*{optimizeStat.level}">
-    </div>
-    <div class="optimize">
-      분야 : &nbsp; <br/>
-      주스탯 : &nbsp;
-    </div>
-    <div class="optimize">
-      공 1 &nbsp; <br/>
-      <input type="text" id="optimize-attack" th:field="*{optimizeStat.attack}">
-    </div>
-    <div class="optimize">
-      부스텟 1 &nbsp; <br/>
-      <input type="text" id="optimize-sub" th:field="*{optimizeStat.sub}">
-    </div>
-    <div class="optimize">
-      주스탯 1% &nbsp; <br/>
-      <input type="text" id="optimize-mainPer" th:field="*{optimizeStat.mainPer}">
-    </div>
-    <div class="optimize">
-      부스탯 1% &nbsp; <br/>
-      <input type="text" id="optimize-subPer" th:field="*{optimizeStat.subPer}">
-    </div>
-    <div class="optimize">
-      올스탯 1% &nbsp; <br/>
-      <input type="text" id="optimize-allPer" th:field="*{optimizeStat.allPer}">
-    </div>
-    <div class="optimize">
-      크뎀 1% &nbsp; <br/>
-      <input type="text" id="optimize-critical" th:field="*{optimizeStat.critical}">
-    </div>
-    <div class="optimize">
-      보공 1% &nbsp; <br/>
-      <input type="text" id="optimize-boss" th:field="*{optimizeStat.boss}">
-    </div>
+  <div class="parent-container">
+    <div class="large-box-container-title">
+      방어구
+      <div class="optimize">
+        <div class="level">
+          Lv.
+          <input type="text" id="level" th:field="*{optimizeStat.level}">
+        </div>
+      </div>
 
+      <div class="optimize">
+        분야 : &nbsp; <br/>
+        주스탯 : &nbsp;
+      </div>
+      <div class="optimize">
+        공 1 &nbsp; <br/>
+        <input type="text" id="optimize-attack" th:field="*{optimizeStat.attack}">
+      </div>
+      <div class="optimize">
+        부스텟 1 &nbsp; <br/>
+        <input type="text" id="optimize-sub" th:field="*{optimizeStat.sub}">
+      </div>
+      <div class="optimize">
+        주스탯 1% &nbsp; <br/>
+        <input type="text" id="optimize-mainPer" th:field="*{optimizeStat.mainPer}">
+      </div>
+      <div class="optimize">
+        부스탯 1% &nbsp; <br/>
+        <input type="text" id="optimize-subPer" th:field="*{optimizeStat.subPer}">
+      </div>
+      <div class="optimize">
+        올스탯 1% &nbsp; <br/>
+        <input type="text" id="optimize-allPer" th:field="*{optimizeStat.allPer}">
+      </div>
+      <div class="optimize">
+        크뎀 1% &nbsp; <br/>
+        <input type="text" id="optimize-critical" th:field="*{optimizeStat.critical}">
+      </div>
+      <div class="optimize">
+        보공 1% &nbsp; <br/>
+        <input type="text" id="optimize-boss" th:field="*{optimizeStat.boss}">
+      </div>
+
+    </div>
   </div>
 
   <div class="largest-box">
 
-    <div class="large-box-container-1">
+    <div class="side_banner">
       <ins class="kakao_ad_area" style="display:none;"
            data-ad-unit = "DAN-XcBwpEkEr4mAlwLX"
            data-ad-width = "160"
@@ -874,7 +863,7 @@
       </div>
     </div>
 
-    <div class="large-box-container-1">
+    <div class="side_banner">
       <ins class="kakao_ad_area" style="display:none;"
            data-ad-unit = "DAN-U9NKOA46zkLZT1Zw"
            data-ad-width = "160"
@@ -883,45 +872,48 @@
     </div>
 
   </div>
-  <div class="largest-box">
-    <div class="result-box">
-      <div class="result">
-        <li>총 주스탯 효율
-          <ul>= 약 <input type="text" id="total-stats-1"
-                         th:field="*{efficientResult.result1.allStatPer}" readonly/> %
-          </ul>
-        </li>
-        <li>주스탯 % 당 가격
-          <ul>= 약 <input type="text" id="price-percentage-1"
-                         th:field="*{efficientResult.result1.priceForMainPer}" readonly/> 억
-          </ul>
-        </li>
-        <li>억당 주스탯 효율
-          <ul>= 약 <input type="text" id="efficient-price-1"
-                         th:field="*{efficientResult.result1.mainPerForPrice}" readonly/> %
-          </ul>
-        </li>
-      </div>
+  <div class="parent-container">
+    <div class="largest-box">
+      <div class="result-box">
+        <div class="result">
+          <li>총 주스탯 효율
+            <ul>= 약 <input type="text" id="total-stats-1"
+                           th:field="*{efficientResult.result1.allStatPer}" readonly/> %
+            </ul>
+          </li>
+          <li>주스탯 % 당 가격
+            <ul>= 약 <input type="text" id="price-percentage-1"
+                           th:field="*{efficientResult.result1.priceForMainPer}" readonly/> 억
+            </ul>
+          </li>
+          <li>억당 주스탯 효율
+            <ul>= 약 <input type="text" id="efficient-price-1"
+                           th:field="*{efficientResult.result1.mainPerForPrice}" readonly/> %
+            </ul>
+          </li>
+        </div>
 
-      <div class="result-2">
-        <li>총 주스탯 효율
-          <ul>= 약 <input type="text" id="total-stats-2"
-                         th:field="*{efficientResult.result2.allStatPer}" readonly/> %
-          </ul>
-        </li>
-        <li>주스탯 % 당 가격
-          <ul>= 약 <input type="text" id="price-percentage-2"
-                         th:field="*{efficientResult.result2.priceForMainPer}" readonly/> 억
-          </ul>
-        </li>
-        <li>억당 주스탯 효율
-          <ul>= 약 <input type="text" id="efficient-price-2"
-                         th:field="*{efficientResult.result2.mainPerForPrice}" readonly/> %
-          </ul>
-        </li>
+        <div class="result-2">
+          <li>총 주스탯 효율
+            <ul>= 약 <input type="text" id="total-stats-2"
+                           th:field="*{efficientResult.result2.allStatPer}" readonly/> %
+            </ul>
+          </li>
+          <li>주스탯 % 당 가격
+            <ul>= 약 <input type="text" id="price-percentage-2"
+                           th:field="*{efficientResult.result2.priceForMainPer}" readonly/> 억
+            </ul>
+          </li>
+          <li>억당 주스탯 효율
+            <ul>= 약 <input type="text" id="efficient-price-2"
+                           th:field="*{efficientResult.result2.mainPerForPrice}" readonly/> %
+            </ul>
+          </li>
+        </div>
       </div>
     </div>
   </div>
+
 </form>
 
 <div class="banner-width">
@@ -935,7 +927,7 @@
 
 <footer>
   <div>
-    <span class="footer-text">Recent Update: 2024.05.20 20:21</span><br/>
+    <span class="footer-text">Recent Update: 2024.06.01 23:28</span><br/>
     <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
   </div>
 </footer>

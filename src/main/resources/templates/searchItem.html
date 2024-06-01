@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<!-- Font Awesome 라이브러리 추가 -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/images/favicon.png"/>
+  <link rel="apple-touch-icon" href="images/favicon.png"/>
+  <title>캐릭터 검색</title>
+
+  <style>
+    body {
+      min-width: 800px;
+      margin: 0; /* body 요소의 기본 마진을 없앰 */
+      padding: 0; /* body 요소의 기본 패딩을 없앰 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴을 둥근 형식으로 변경 */
+      background: #FFF5E0;
+      overflow-x: auto;
+    }
+
+    nav {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 20px 50px; /* 위아래와 좌우 padding 값을 조정 */
+      display: flex;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 0.2vh 0.4vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      margin-bottom: 10px;
+      font-size: 1.2rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+    }
+
+    .logo a {
+      font-size: 1.5rem; /* 로고의 글자 크기를 키움 */
+      color: black;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 100px; /* 각 메뉴 사이의 간격을 늘림 */
+    }
+
+    nav ul li:first-child {
+      margin-left: 10px; /* 첫 번째 메뉴 버튼의 왼쪽 마진을 없앰 */
+    }
+
+    nav ul li:last-child {
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s; /* 호버 효과를 위한 트랜지션 설정 */
+    }
+
+    nav ul li a:hover {
+      color: #FF5733; /* 호버시 글자색 변경 */
+    }
+
+    footer {
+      background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+      padding: 20px 50px; /* 위아래와 좌우 padding 값을 조정 */
+      display: block;
+      justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
+      align-items: center; /* 수직 가운데 정렬 */
+      box-shadow: 0 0.2vh 0.44vw rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+      font-family: 'Noto Sans KR', sans-serif; /* 글꼴 설정 */
+      font-size: 1rem; /* 로고의 글자 크기를 키움 */
+      font-weight: bold; /* 로고 글자 굵게 설정 */
+      margin-top: 10px;
+    }
+
+    .footer-text {
+      float: right;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 500px;
+      text-align: left;
+      border: 2px solid #FFDAB9;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 300%;
+      margin-left: -40px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -40px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #000 transparent transparent transparent;
+      white-space: pre-line; /* 텍스트의 줄 바꿈 허용 */
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .banner-width {
+      margin: 0 auto;
+      padding: 4vh 18vw;
+      align-items: center;
+    }
+
+    .side_banner {
+      width: 330px;
+      text-align: center;
+      margin: 15px;
+      overflow-x: auto;
+    }
+
+    .main-box {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      margin-bottom: 30px;
+    }
+
+    .search-form {
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .search-input {
+      margin-top: 30px;
+      text-align: center;
+      width: 300px; /* 텍스트 상자의 너비 */
+      height: 40px; /* 텍스트 상자의 높이 */
+      font-size: 16px; /* 글꼴 크기 */
+      padding: 10px; /* 텍스트 상자의 패딩 */
+      border: 2px solid #ccc; /* 테두리 스타일 */
+      border-radius: 20px; /* 텍스트 상자의 모서리 반경 */
+    }
+
+    .search-button {
+      margin-top: 30px;
+      width: 120px; /* 검색 버튼의 너비 */
+      height: 60px; /* 검색 버튼의 높이 */
+      font-size: 18px; /* 버튼의 글꼴 크기 */
+      background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
+      color: white; /* 글자색 */
+      border: none; /* 테두리 없음 */
+      border-radius: 20px; /* 버튼의 모서리 반경 */
+      cursor: pointer; /* 포인터로 변경하여 클릭 가능한 모양으로 변경 */
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 10px 20px 0;
+    }
+
+    .radio-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .radio-buttons label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .radio-group-title {
+      align-items: center;
+      margin-right: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .radio-group input[type="radio"] {
+      display: none;
+    }
+
+    .radio-buttons input[type="radio"]:checked + label {
+      background-color: #ff7f50; /* 배경색을 더 진한 주황색으로 변경 */
+      color: #fff;
+    }
+
+    .search-button:hover {
+      background-color: #ff7f50; /* 호버시 배경색을 더 진한 주황색으로 변경 */
+    }
+
+    .search-button:active {
+      background-color: #ff7f50; /* 배경색을 더 진한 주황색으로 변경 */
+    }
+
+    .additional-inputs {
+      overflow-x: auto;
+      display: flex; /* 가로로 나열 */
+    }
+
+    .input-group {
+      flex: 0 0 auto; /* 자식 요소의 크기를 변경하지 않고 고정 크기로 유지 */
+      margin-right: 20px; /* 각 입력 그룹 사이의 간격 */
+    }
+
+    .input-group label {
+      display: block; /* 라벨을 블록 수준 요소로 만들어 위아래로 배치 */
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100px; /* 입력값의 너비 */
+      text-align: center;
+      height: 25px; /* 텍스트 상자의 높이 */
+      font-size: 16px; /* 글꼴 크기 */
+      padding: 10px; /* 텍스트 상자의 패딩 */
+      border: 2px solid #ccc; /* 테두리 스타일 */
+      border-radius: 20px; /* 텍스트 상자의 모서리 반경 */
+    }
+
+    .largest-box {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
+    .box {
+      width: 2000px;
+      padding: 20px;
+
+      border-radius: 8px;
+    }
+
+    h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      background-color: #FFFFFF; /* 테이블 배경색 */
+    }
+
+    th {
+      font-size: 18px;
+      padding: 10px;
+      background-color: #FFCC99; /* 헤더 배경색 */
+      border-bottom: 2px solid #ddd;
+      text-align: center;
+    }
+
+    td {
+      padding: 10px;
+      font-size: 16px;
+      border-bottom: 2px solid #FFCC99;
+      text-align: center;
+    }
+
+    tr:hover {
+      background-color: #FFDAB9; /* 행 마우스 오버 색상 */
+    }
+
+    .item-name {
+      text-align: left;
+    }
+
+    @media only screen and (max-width: 767px) {
+      nav {
+        padding: 10px 20px;
+      }
+
+      .logo a {
+        font-size: 1.2rem;
+      }
+
+      nav ul {
+        flex-direction: column; /* 모바일에서는 메뉴를 세로로 나열 */
+      }
+
+      nav ul li {
+        margin-left: 0; /* 메뉴 간격 초기화 */
+        margin-bottom: 10px; /* 각 메뉴 항목 사이에 간격 추가 */
+      }
+
+      .input-container label {
+        width: auto;
+        margin-right: 10px;
+      }
+
+      .banner-width {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li class="logo"><a href="/">🍁 Maple 가성비 계산기</a>
+      <div class="tooltip">&nbsp;
+        <i class="fas fa-question-circle"></i>
+        <span class="tooltip-text">
+          우리 서비스는 메이플스토리 게임 초심자 및 초보분들을 위해 제작되었습니다.<br/><br/>
+
+          아이템의 가성비를 비교하여 더 나은 선택을 할 수 있도록 돕는 것이 목적입니다. 또한, 장비 교체 우선순위를 제공하여 사용자들이 효율적으로 장비를 업그레이드할 수 있도록 안내합니다.<br/><br/>
+
+          그러나 사용자가 입력한 정보를 기반으로 한 대략적인 결과만을 제공하므로 정확성을 보장할 수는 없습니다. 더욱 정확한 정보가 필요하신 경우에는 전문적인 서비스를 찾아보시기를 권장합니다.<br/><br/>
+
+          메이플스토리 게임에서 아이템의 가성비는 여러 요소에 의해 결정되며, 저희 서비스는 초보분들을 위한 일종의 안내서로 이해해주시기 바랍니다. 이를 통해 사용자들이 초기 단계에서 효율적인 아이템 선택과 장비 교체를 할 수 있도록 지원합니다.<br/><br/>
+
+          추가적인 요청이나 오류 신고에 대해서는 아래의 연락처로 문의해주시기 바랍니다.<br/><br/>
+
+          감사합니다.
+        </span>
+      </div>
+    </li>
+  </ul>
+  <ul>
+    <!--    <li><a href="#"> 무기류 </a></li> &lt;!&ndash; 메뉴1 추가 &ndash;&gt;-->
+    <li><a th:href="@{/search}"> 캐릭터 </a></li> <!-- 메뉴1 추가 -->
+    <li><a th:href="@{/}"> 방어구 </a></li> <!-- 메뉴1 추가 -->
+    <li><a th:href="@{/package}"> 패키지 </a></li>
+  </ul>
+</nav>
+<div class="banner-width">
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit="DAN-BFDs2ooxka2z6vXU"
+       data-ad-width="320"
+       data-ad-height="100"></ins>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+</div>
+<form method="get" th:action="@{/search/nickname}" th:object="${itemListUp}">
+  <div class="main-box">
+    <div class="search-box">
+      <div class="search-form">
+        <input type="text" id="search-nickname" placeholder="닉네임을 입력하세요" class="search-input" th:field="*{nickname}">
+
+        <div class="radio-group">
+          <span class="radio-group-title">프리셋</span>
+          <div class="radio-buttons">
+            <input type="radio" id="number1" name="number" value="1" th:field="*{preset}" required>
+            <label for="number1">
+              <span>1</span>
+            </label>
+            <input type="radio" id="number2" name="number" th:field="*{preset}" value="2">
+            <label for="number2">
+              <span>2</span>
+            </label>
+            <input type="radio" id="number3" name="number" th:field="*{preset}" value="3">
+            <label for="number3">
+              <span>3</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="search-button">검색</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-box">
+    <div class="additional-inputs">
+      <div class="input-group">
+        <label for="title">변환 스탯</label>
+        <input type="text" id="title" class="additional-input" placeholder="본인 주스탯" readonly>
+      </div>
+      <div class="input-group">
+        <label for="optimize-attack">주스탯 1</label>
+        <input type="text" id="optimize-main" class="additional-input"
+               th:field="*{optimizeStat.main}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-attack">공 1</label>
+        <input type="text" id="optimize-attack" class="additional-input"
+               th:field="*{optimizeStat.attack}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-sub">부스탯 1</label>
+        <input type="text" id="optimize-sub" class="additional-input"
+               th:field="*{optimizeStat.sub}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-mainPer">주스탯 1%</label>
+        <input type="text" id="optimize-mainPer" class="additional-input"
+               th:field="*{optimizeStat.mainPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-subPer">부스탯 1%</label>
+        <input type="text" id="optimize-subPer" class="additional-input"
+               th:field="*{optimizeStat.subPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-allPer">올스탯 1%</label>
+        <input type="text" id="optimize-allPer" class="additional-input"
+               th:field="*{optimizeStat.allPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-critical">크뎀 1%</label>
+        <input type="text" id="optimize-critical" class="additional-input"
+               th:field="*{optimizeStat.critical}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-boss">보공 1%</label>
+        <input type="text" id="optimize-boss" class="additional-input"
+               th:field="*{optimizeStat.boss}">
+      </div>
+    </div>
+  </div>
+
+  <div class="largest-box">
+    <div class="side_banner">
+      <ins class="kakao_ad_area" style="display:none;"
+           data-ad-unit="DAN-XcBwpEkEr4mAlwLX"
+           data-ad-width="160"
+           data-ad-height="600"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+
+    <div class="main-box">
+      <div class="box">
+        <div th:if="${exception != null}">
+          <H2 th:text="${exception.message}"></H2>
+        </div>
+        <div th:if="${itemInfoList == null}">
+          <H2 style="text-align: center"> 닉네임을 검색해주세요</H2>
+        </div>
+        <div th:if="${itemInfoList != null}">
+          <h2>
+            아이템 스펙 순위
+            <div class="tooltip">&nbsp;
+              <i class="fas fa-question-circle"></i>
+              <span class="tooltip-text">
+              <strong>서비스 참고사항</strong><br/><br/>
+                1. <strong>스탯 상승량 안내</strong><br/>
+                - 제공되는 수치는 이론적인 스탯 상승량을 절대값으로 나타낸 것입니다.<br/>
+                - 각 직업과 캐릭터의 스펙에 따라 적용치가 달라질 수 있음을 유의해 주세요.<br/><br/>
+
+                2. <strong>% 표기 수치 안내</strong><br/>
+                - 가독성을 위해 %로 표기된 수치들은 단순히 10으로 나눈 값에 %를 붙인 것입니다.<br/>
+                - 이 수치들은 상대적인 값이 아니라 절대적인 수치임을 알려드립니다.<br/><br/>
+
+                3. <strong>비교의 의미</strong><br/>
+                - 다른 유저와의 비교는 의미가 없으며, 본인의 장비 순위를 평가하는 용도로 사용해 주시기 바랍니다.<br/><br/>
+
+                위 내용을 참고하여, 자신의 캐릭터 장비 평가에 활용해 주시면 감사하겠습니다.
+              </span>
+            </div>
+          </h2>
+          <table>
+            <thead>
+            <tr>
+              <th>아이템</th>
+              <th>기본 스펙</th>
+              <th>주문서(익셉포함)</th>
+              <th>추가옵션</th>
+              <th>잠재능력</th>
+              <th>에디셔널</th>
+              <th>스타포스</th>
+              <th>환산 주스탯 %</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 검색 결과 반복 -->
+            <tr th:each="item : ${itemInfoList}">
+              <td class="item-name">
+                <img th:src="${item.img}" alt="IMG" width="35" height="35"
+                     style="vertical-align: middle;">
+                <span th:text="${item.name}"
+                      style="margin-left: 10px; font-weight: bold;"></span>
+              </td>
+              <td>
+                <span th:text="${item.basicOption}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/etc.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.etcOption}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/add.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.addOption}"></span>
+              </td>
+
+              <td>
+                <img th:src="@{/images/potential.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.potential + '%'}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/additional.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.additional + '%'}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/starforce.png}" alt="IMG" width="20" height="20">
+                <span
+                    th:text="${'x' + item.starForce + ' '+'/'+' ' + item.starForceStat + '%'}"></span>
+              </td>
+              <td th:text="${item.value + '%'}" style="font-weight: bold"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side_banner">
+      <ins class="kakao_ad_area" style="display:none;"
+           data-ad-unit="DAN-U9NKOA46zkLZT1Zw"
+           data-ad-width="160"
+           data-ad-height="600"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    </div>
+  </div>
+
+</form>
+
+
+<div class="banner-width">
+  <ins class="kakao_ad_area" style="display:none;"
+       data-ad-unit="DAN-iQowpVhEzfPl5pBd"
+       data-ad-width="320"
+       data-ad-height="100"></ins>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+</div>
+
+
+<footer>
+  <div>
+    <span class="footer-text">Recent Update: 2024.06.01 23:28</span><br/>
+    <span class="footer-text">Contact: assistanceMaple@gmail.com</span><br/>
+  </div>
+</footer>
+
+<script>
+  const inputs = document.querySelectorAll('input');
+
+  // 모든 input 요소에 대해 이벤트 리스너를 추가합니다.
+  inputs.forEach(input => {
+    input.addEventListener('input', function () {
+      // 입력된 값이 9999를 초과하는지, 문자인지, 음수인지 확인합니다.
+      if (this.id === 'search-nickname') {
+        ;
+      } else if (this.value === "" || parseInt(this.value) > 999 || isNaN(this.value) || parseInt(
+          this.value) < 0) {
+        // 입력된 값이 조건을 만족하면 값을 0으로 설정합니다.
+        this.value = 0;
+        alert("0 이상 999 이하의 숫자만 입력할 수 있습니다.");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

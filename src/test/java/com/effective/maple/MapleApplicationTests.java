@@ -1,4 +1,4 @@
-package com.effiective.maple;
+package com.effective.maple;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

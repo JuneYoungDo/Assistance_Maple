@@ -1,12 +1,22 @@
-package com.effiective.maple.domain.dto;
+package com.effective.maple.domain.dto;
 
-import com.effiective.maple.domain.dto.ResponseDto.EfficientResult;
+import com.effective.maple.domain.dto.ResponseDto.EfficientResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class RequestDto {
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class ItemListUpReq {
+        private String nickname;
+        private String preset;
+        private OptimizeStat optimizeStat;
+    }
 
     @Getter
     @Setter
@@ -38,6 +48,7 @@ public class RequestDto {
     @AllArgsConstructor
     public static class OptimizeStat {
         private int level = 0;
+        private double main = 0;
         private double attack = 0;
         private double sub = 0;
         private double mainPer = 0;
