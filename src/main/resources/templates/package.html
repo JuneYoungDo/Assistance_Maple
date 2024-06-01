@@ -23,7 +23,7 @@
 
     nav {
       background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-      padding: 20px 50px; /* 위아래와 좌우 padding 값을 조정 */
+      padding: 18px 45px; /* 위아래와 좌우 padding 값을 조정 */
       display: flex;
       justify-content: space-between; /* 로고와 메뉴를 좌우에 정렬 */
       align-items: center; /* 수직 가운데 정렬 */
@@ -150,9 +150,9 @@
     }
 
     .side_banner {
-      width: 330px;
+      width: 300px;
       text-align: center;
-      margin: 15px;
+      margin: 10px;
       overflow-x: auto;
     }
 
@@ -437,12 +437,12 @@
   <div class="largest-box">
     <div class="result-box">
       <div class="result">
-        <li>패키지 내 물품 개당 가격
+        <li style="margin-top: 10px">패키지 내 물품 개당 가격
           <ul>= 약 <input type="text" id="total-stats-1"
                          th:field="*{result}" readonly/> 메소
           </ul>
         </li>
-        <li class="result-text">
+        <li class="result-text" style="margin-bottom: 10px">
           경매장 물품 가격이 위 가격보다 더 싸다면 경매장을 이용하는 것이 효율적
         </li>
       </div>
