@@ -1,6 +1,5 @@
 package com.effective.maple.domain.dto;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,14 +14,14 @@ public class ResponseDto {
     public static class ItemInfo {
         private String img;
         private String name;
-        private double basicOption;
-        private double etcOption;   // 작 + 익셉
-        private double addOption;   // 추옵
-        private double potential;
-        private double additional;
-        private int starForce;
-        private double starForceStat;
-        private double value;
+        private Double basicOption;
+        private Double etcOption;   // 작 + 익셉
+        private Double addOption;   // 추옵
+        private Double potential;
+        private Double additional;
+        private Integer starForce;
+        private Double starForceStat;
+        private Double value;
     }
 
     @Getter

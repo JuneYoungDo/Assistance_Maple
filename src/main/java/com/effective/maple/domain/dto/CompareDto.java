@@ -1,32 +1,26 @@
 package com.effective.maple.domain.dto;
 
+import com.effective.maple.domain.dto.OptimizeDto.CustomAllPart;
 import com.effective.maple.domain.dto.ResponseDto.EfficientResult;
+import com.effective.maple.domain.dto.ResponseDto.ItemInfo;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class RequestDto {
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class ItemListUpReq {
-        private String nickname;
-        private String preset;
-        private OptimizeStat optimizeStat;
-    }
+public class CompareDto {
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ItemInformation {
-        private OptimizeStat optimizeStat = new OptimizeStat();
-        private EfficientResult efficientResult = new EfficientResult();
+        private CustomAllPart customAllPart;
+        private EfficientResult efficientResult;
         private Item item1 = new Item();
         private Item item2 = new Item();
+        private List<ItemInfo> customItemList;
     }
 
     @Getter
@@ -41,22 +35,6 @@ public class RequestDto {
         private Price price = new Price();
     }
 
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class OptimizeStat {
-        private int level = 0;
-        private double main = 0;
-        private double attack = 0;
-        private double sub = 0;
-        private double mainPer = 0;
-        private double subPer = 0;
-        private double allPer = 0;
-        private double critical = 0;
-        private double boss = 0;
-    }
 
     @Getter
     @Setter

@@ -240,10 +240,11 @@
       display: block; /* 라벨을 블록 수준 요소로 만들어 위아래로 배치 */
       text-align: center;
       margin-bottom: 5px;
+      margin-top: 20px;
     }
 
     .input-group input {
-      width: 90px; /* 입력값의 너비 */
+      width: 80px; /* 입력값의 너비 */
       text-align: center;
       height: 22px; /* 텍스트 상자의 높이 */
       font-size: 16px; /* 글꼴 크기 */
@@ -367,31 +368,32 @@
        data-ad-height="100"></ins>
   <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
-<form method="get" th:action="@{/search/nickname}" th:object="${itemListUp}">
+<form method="get" th:action="@{/search/nickname}" th:object="${itemInformation}">
   <div class="main-box">
     <div class="search-box">
       <div class="search-form">
-        <input type="text" id="search-nickname" placeholder="닉네임을 입력하세요" class="search-input" th:field="*{nickname}">
+        <input type="text" id="search-nickname" placeholder="닉네임을 입력하세요" class="search-input"
+               th:field="*{customAllPart.nickname}">
 
         <div class="radio-group">
           <span class="radio-group-title">프리셋</span>
           <div class="radio-buttons">
-            <input type="radio" id="number1" name="number" value="1" th:field="*{preset}" required>
+            <input type="radio" id="number1" name="number" value="1" th:field="*{customAllPart.preset}" required>
             <label for="number1">
               <span>1</span>
             </label>
-            <input type="radio" id="number2" name="number" th:field="*{preset}" value="2">
+            <input type="radio" id="number2" name="number" th:field="*{customAllPart.preset}" value="2">
             <label for="number2">
               <span>2</span>
             </label>
-            <input type="radio" id="number3" name="number" th:field="*{preset}" value="3">
+            <input type="radio" id="number3" name="number" th:field="*{customAllPart.preset}" value="3">
             <label for="number3">
               <span>3</span>
             </label>
           </div>
         </div>
 
-        <button type="submit" class="search-button">검색</button>
+        <button type="submit" class="search-button" name="status">검색</button>
       </div>
     </div>
   </div>
@@ -405,43 +407,48 @@
       <div class="input-group">
         <label for="optimize-attack">주스탯 1</label>
         <input type="text" id="optimize-main" class="additional-input"
-               th:field="*{optimizeStat.main}">
+               th:field="*{customAllPart.optimizeStat.main}">
       </div>
       <div class="input-group">
         <label for="optimize-attack">공 1</label>
         <input type="text" id="optimize-attack" class="additional-input"
-               th:field="*{optimizeStat.attack}">
+               th:field="*{customAllPart.optimizeStat.attack}">
       </div>
       <div class="input-group">
         <label for="optimize-sub">부스탯 1</label>
         <input type="text" id="optimize-sub" class="additional-input"
-               th:field="*{optimizeStat.sub}">
+               th:field="*{customAllPart.optimizeStat.sub}">
       </div>
       <div class="input-group">
         <label for="optimize-mainPer">주스탯 1%</label>
         <input type="text" id="optimize-mainPer" class="additional-input"
-               th:field="*{optimizeStat.mainPer}">
+               th:field="*{customAllPart.optimizeStat.mainPer}">
       </div>
       <div class="input-group">
         <label for="optimize-subPer">부스탯 1%</label>
         <input type="text" id="optimize-subPer" class="additional-input"
-               th:field="*{optimizeStat.subPer}">
+               th:field="*{customAllPart.optimizeStat.subPer}">
       </div>
       <div class="input-group">
         <label for="optimize-allPer">올스탯 1%</label>
         <input type="text" id="optimize-allPer" class="additional-input"
-               th:field="*{optimizeStat.allPer}">
+               th:field="*{customAllPart.optimizeStat.allPer}">
       </div>
       <div class="input-group">
         <label for="optimize-critical">크뎀 1%</label>
         <input type="text" id="optimize-critical" class="additional-input"
-               th:field="*{optimizeStat.critical}">
+               th:field="*{customAllPart.optimizeStat.critical}">
       </div>
       <div class="input-group">
         <label for="optimize-boss">보공 1%</label>
         <input type="text" id="optimize-boss" class="additional-input"
-               th:field="*{optimizeStat.boss}">
+               th:field="*{customAllPart.optimizeStat.boss}">
       </div>
+
+      <div class="input-group">
+        <button type="submit" class="search-button" name="status" th:value="reset">초기화</button>
+      </div>
+
     </div>
   </div>
 
@@ -459,6 +466,62 @@
         <div th:if="${exception != null}">
           <H2 th:text="${exception.message}"></H2>
         </div>
+
+        <div th:if="*{customItemList != null}">
+          <h2> 추가 장비 </h2>
+          <table>
+            <thead>
+            <tr>
+              <th>아이템</th>
+              <th>기본 스펙</th>
+              <th>주문서(익셉포함)</th>
+              <th>추가옵션</th>
+              <th>잠재능력</th>
+              <th>에디셔널</th>
+              <th>스타포스</th>
+              <th>환산 주스탯 %</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : *{customItemList}">
+              <td class="item-name">
+                <img th:src="${item.img}" width="35" height="35"
+                     style="vertical-align: middle;" onerror="this.onerror=null; this.src='/images/questionMark.png';">
+                <span th:text="${item.name}"
+                      style="margin-left: 10px; font-weight: bold;"></span>
+              </td>
+              <td>
+                <span th:text="${item.basicOption}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/etc.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.etcOption}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/add.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.addOption}"></span>
+              </td>
+
+              <td>
+                <img th:src="@{/images/potential.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.potential + '%'}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/additional.png}" alt="IMG" width="20" height="20">
+                <span th:text="${item.additional + '%'}"></span>
+              </td>
+              <td>
+                <img th:src="@{/images/starforce.png}" alt="IMG" width="20" height="20">
+                <span
+                    th:text="${'x' + item.starForce + ' '+'/'+' ' + item.starForceStat + '%'}"></span>
+              </td>
+              <td th:text="${item.value + '%'}" style="font-weight: bold"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+
         <div th:if="${itemInfoList == null}">
           <H2 style="text-align: center"> 닉네임을 검색해주세요</H2>
         </div>
@@ -501,8 +564,8 @@
             <!-- 검색 결과 반복 -->
             <tr th:each="item : ${itemInfoList}">
               <td class="item-name">
-                <img th:src="${item.img}" alt="IMG" width="35" height="35"
-                     style="vertical-align: middle;">
+                <img th:src="${item.img}" width="35" height="35"
+                     style="vertical-align: middle;" onerror="this.onerror=null; this.src='/images/questionMark.png';">
                 <span th:text="${item.name}"
                       style="margin-left: 10px; font-weight: bold;"></span>
               </td>

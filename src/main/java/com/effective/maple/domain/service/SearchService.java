@@ -1,7 +1,7 @@
 package com.effective.maple.domain.service;
 
-import com.effective.maple.domain.dto.RequestDto.ItemListUpReq;
-import com.effective.maple.domain.dto.RequestDto.OptimizeStat;
+import com.effective.maple.domain.dto.CompareDto.ItemInformation;
+import com.effective.maple.domain.dto.OptimizeDto.OptimizeStat;
 import com.effective.maple.domain.dto.ResponseDto.ItemInfo;
 import com.effective.maple.domain.usecase.SearchUseCase;
 import com.effective.maple.global.MapleConstants;
@@ -28,27 +28,36 @@ public class SearchService implements SearchUseCase {
     private static int COUNT = 0;
 
     @Override
-    public List<ItemInfo> getItemListUp(ItemListUpReq itemListUpReq)
+    public List<ItemInfo> getItemListUp(ItemInformation itemInformation)
         throws IOException, ParseException, InterruptedException {
         log.info("호출 횟수 : " + ++COUNT);
-        OptimizeStat optimizeStat = itemListUpReq.getOptimizeStat();
-        String nickname = removeWhitespace(itemListUpReq.getNickname());
+        OptimizeStat optimizeStat = itemInformation.getCustomAllPart().getOptimizeStat();
+        String nickname = removeWhitespace(itemInformation.getCustomAllPart().getNickname());
         validateString(nickname);
         log.info("닉네임 : " + nickname);
-        String preset = itemListUpReq.getPreset();
+        String preset = itemInformation.getCustomAllPart().getPreset();
         JSONObject jsonObject = mapleService.getStatInformation(nickname);
         optimizeStat.setLevel(((Number) jsonObject.get("level")).intValue());
-        return getAllItemInformation(optimizeStat, jsonObject, preset);
+        return getAllItemInformation(itemInformation.getCustomItemList(), optimizeStat, jsonObject,
+            preset);
     }
 
-    private List<ItemInfo> getAllItemInformation(OptimizeStat optimizeStat, JSONObject jsonObject,
+    private List<ItemInfo> getAllItemInformation(List<ItemInfo> customItems,
+        OptimizeStat optimizeStat, JSONObject jsonObject,
         String preset) {
         List<ItemInfo> itemInfoList = new ArrayList<>();
+        if (customItems != null) {
+            for (ItemInfo customItem : customItems) {
+                customItem.setValue(customItem.getValue() * 10);
+                itemInfoList.add(customItem);
+            }
+        }
         String characterClass = (String) jsonObject.get("character_class");
         log.info(characterClass);
         if (MapleConstants.isZenonAndDuCaSha(characterClass)) {
             log.info("적용 스탯 - 제논듀카섀");
-            itemInfoList = getAllItemInformationForZenonAndDuCaSha(characterClass, optimizeStat,
+            itemInfoList = getAllItemInformationForZenonAndDuCaSha(customItems, characterClass,
+                optimizeStat,
                 jsonObject, preset);
         } else {
             String type = MapleConstants.getValue(characterClass);
@@ -75,10 +84,17 @@ public class SearchService implements SearchUseCase {
         return itemInfoList;
     }
 
-    private List<ItemInfo> getAllItemInformationForZenonAndDuCaSha(String characterClass,
+    private List<ItemInfo> getAllItemInformationForZenonAndDuCaSha(List<ItemInfo> customItems,
+        String characterClass,
         OptimizeStat optimizeStat, JSONObject jsonObject,
         String preset) {
         List<ItemInfo> itemInfoList = new ArrayList<>();
+        if (customItems != null) {
+            for (ItemInfo customItem : customItems) {
+                customItem.setValue(customItem.getValue() * 10);
+                itemInfoList.add(customItem);
+            }
+        }
         JSONArray itemPreset = (JSONArray) jsonObject.get("item_equipment_preset_" + preset);
 
         for (Object o : itemPreset) {

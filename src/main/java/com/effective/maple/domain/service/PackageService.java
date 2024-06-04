@@ -1,6 +1,6 @@
 package com.effective.maple.domain.service;
 
-import com.effective.maple.domain.dto.RequestDto.PackageItem;
+import com.effective.maple.domain.dto.CompareDto.PackageItem;
 import com.effective.maple.domain.usecase.PackageUseCase;
 import java.text.DecimalFormat;
 import org.springframework.stereotype.Service;

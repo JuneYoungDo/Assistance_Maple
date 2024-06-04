@@ -1,10 +1,10 @@
 package com.effective.maple.domain.usecase;
 
-import com.effective.maple.domain.dto.RequestDto.ItemInformation;
-import com.effective.maple.domain.dto.RequestDto.OptimizeStat;
+import com.effective.maple.domain.dto.CompareDto.ItemInformation;
+import com.effective.maple.domain.dto.OptimizeDto.CustomAllPart;
 
 public interface MainUseCase {
-    OptimizeStat getInitOptimize();
+    CustomAllPart getInitCustomAllPart();
     ItemInformation getEfficientResult(ItemInformation itemInformation,int type);
-
+    ItemInformation addItemToCharacter(ItemInformation itemInformation, int type);
 }

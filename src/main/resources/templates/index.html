@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <meta charset="UTF-8">
-  <meta name="google-site-verification" content="ZWg0BZHEiUuSCMsLYJw1QjMPpSvNBzOt6lk__JoRUzg" />
+  <meta name="google-site-verification" content="ZWg0BZHEiUuSCMsLYJw1QjMPpSvNBzOt6lk__JoRUzg"/>
   <link rel="icon" href="/images/favicon.png"/>
   <link rel="apple-touch-icon" href="/images/favicon.png"/>
   <title>메이플 계산기</title>
@@ -89,90 +89,6 @@
       overflow-x: auto;
       display: flex;
       justify-content: center;
-    }
-
-    .level {
-      font-size: x-large;
-      font-weight: 500;
-      margin-left: 18px;
-    }
-
-    .optimize {
-      font-size: large;
-      font-weight: 500;
-      margin-left: 27px;
-      text-align: center;
-    }
-
-    .level input {
-      width: 90px;
-      height: 45px;
-      border-radius: 10px;
-      border: 0;
-      text-align: center;
-      font-size: large;
-      color: black;
-    }
-
-    .optimize input {
-      width: 81px;
-      height: 27px;
-      border-radius: 10px;
-      border: 0;
-      text-align: center;
-      font-size: large;
-      color: black;
-    }
-
-    .large-box-container-title {
-      overflow-x: auto;
-      font-size: xx-large;
-      padding: 15px 10px; /* 위아래와 좌우 padding 값을 조정 */
-      font-weight: 700;
-      display: flex;
-      margin-bottom: 5px; /* 네비게이션 바와 다음 요소 사이의 간격을 설정 */
-      color: black;
-    }
-
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
-    .tooltip .tooltip-text {
-      visibility: hidden;
-      width: 500px;
-      text-align: left;
-      border: 2px solid #FFDAB9;
-      background: white;
-      color: black;
-      border-radius: 6px;
-      padding: 5px;
-      position: absolute;
-      z-index: 1;
-      top: 50%;
-      left: 300%;
-      margin-left: -40px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 14px;
-    }
-
-    .tooltip .tooltip-text::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -40px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #000 transparent transparent transparent;
-      white-space: pre-line; /* 텍스트의 줄 바꿈 허용 */
-    }
-
-    .tooltip:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
     }
 
     .largest-box {
@@ -263,7 +179,18 @@
     }
 
     .small-box div {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+    }
+
+    .small-box-last {
+      width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
+      border: 2px solid #FFDAB9;
+      padding: 4px 10px;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      border-radius: 10px;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
     }
 
     .small-box-2 {
@@ -282,7 +209,17 @@
     }
 
     .small-box-2 div {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
+    }
+
+    .small-box-2-last {
+      width: calc(50% - 10px); /* 작은 상자의 너비를 설정 */
+      padding: 4px 10px;
+      box-sizing: border-box; /* 패딩과 테두리를 포함한 크기로 설정 */
+      border-radius: 10px;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
     }
 
     .input-container {
@@ -295,7 +232,7 @@
     .input-container label {
       margin-right: 10px;
       font-size: medium; /* 제목의 크기를 줄임 */
-      width: 140px;
+      width: 180px;
     }
 
     .input-container input {
@@ -307,8 +244,18 @@
       padding: 8px; /* 입력 상자의 내부 여백을 추가하여 높이를 늘림 */
     }
 
-    .submit-button {
-      position: absolute; /* 제출 버튼의 위치 설정 */
+    .double-box {
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .double-box-inner {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .double-button {
       bottom: 10px;
       right: 35px;
       font-size: larger; /* 버튼의 폰트 크기를 크게 설정 */
@@ -320,7 +267,7 @@
       cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
     }
 
-    .submit-button:hover {
+    .double-button:hover {
       background-color: #ff7f50; /* 호버시 배경색을 더 진한 주황색으로 변경 */
     }
 
@@ -377,6 +324,107 @@
       padding: 4vh 18vw;
     }
 
+    .main-box {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      margin-bottom: 10px;
+    }
+
+    .additional-inputs {
+      overflow-x: auto;
+      display: flex; /* 가로로 나열 */
+    }
+
+    .input-group {
+      margin-top: 25px;
+      flex: 0 0 auto; /* 자식 요소의 크기를 변경하지 않고 고정 크기로 유지 */
+      margin-right: 20px; /* 각 입력 그룹 사이의 간격 */
+    }
+
+    .input-group label {
+      display: block; /* 라벨을 블록 수준 요소로 만들어 위아래로 배치 */
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 80px; /* 입력값의 너비 */
+      text-align: center;
+      height: 22px; /* 텍스트 상자의 높이 */
+      font-size: 16px; /* 글꼴 크기 */
+      padding: 10px; /* 텍스트 상자의 패딩 */
+      border: 2px solid #ccc; /* 테두리 스타일 */
+      border-radius: 20px; /* 텍스트 상자의 모서리 반경 */
+    }
+
+    .radio-buttons label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 500px;
+      text-align: left;
+      border: 2px solid #FFDAB9;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 300%;
+      margin-left: -40px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+    }
+
+    .tooltip .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -40px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #000 transparent transparent transparent;
+      white-space: pre-line; /* 텍스트의 줄 바꿈 허용 */
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .search-button {
+      margin-top: 10px;
+      width: 120px; /* 검색 버튼의 너비 */
+      height: 60px; /* 검색 버튼의 높이 */
+      font-size: 18px; /* 버튼의 글꼴 크기 */
+      background-color: #ffa07a; /* 파스텔 계열의 옅은 주황색 */
+      color: white; /* 글자색 */
+      border: none; /* 테두리 없음 */
+      border-radius: 20px; /* 버튼의 모서리 반경 */
+      cursor: pointer; /* 포인터로 변경하여 클릭 가능한 모양으로 변경 */
+    }
+
     @media only screen and (max-width: 767px) {
       nav {
         padding: 10px 20px;
@@ -395,16 +443,8 @@
         margin-bottom: 10px; /* 각 메뉴 항목 사이에 간격 추가 */
       }
 
-      .level {
-        font-size: large;
-      }
-
       .submit-button {
         padding: 15px;
-        font-size: large;
-      }
-
-      .large-box-container-title {
         font-size: large;
       }
 
@@ -469,54 +509,66 @@
 </nav>
 <div class="banner-width">
   <ins class="kakao_ad_area" style="display:none;"
-       data-ad-unit = "DAN-BFDs2ooxka2z6vXU"
-       data-ad-width = "320"
-       data-ad-height = "100"></ins>
+       data-ad-unit="DAN-BFDs2ooxka2z6vXU"
+       data-ad-width="320"
+       data-ad-height="100"></ins>
   <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
 
 <form method="get" th:action="@{/calculate}" th:object="${itemInformation}">
-  <div class="parent-container">
-    <div class="large-box-container-title">
-      방어구
-      <div class="optimize">
-        <div class="level">
-          Lv.
-          <input type="text" id="level" th:field="*{optimizeStat.level}">
-        </div>
+  <div class="main-box">
+    <H2> 방어구</H2>
+  </div>
+  <div class="main-box">
+    <div class="additional-inputs">
+      <div class="input-group">
+        <label for="optimize-attack">레벨</label>
+        <input type="text" id="optimize-level" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.level}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-attack">주스탯 1</label>
+        <input type="text" id="optimize-main" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.main}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-attack">공 1</label>
+        <input type="text" id="optimize-attack" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.attack}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-sub">부스탯 1</label>
+        <input type="text" id="optimize-sub" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.sub}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-mainPer">주스탯 1%</label>
+        <input type="text" id="optimize-mainPer" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.mainPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-subPer">부스탯 1%</label>
+        <input type="text" id="optimize-subPer" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.subPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-allPer">올스탯 1%</label>
+        <input type="text" id="optimize-allPer" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.allPer}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-critical">크뎀 1%</label>
+        <input type="text" id="optimize-critical" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.critical}">
+      </div>
+      <div class="input-group">
+        <label for="optimize-boss">보공 1%</label>
+        <input type="text" id="optimize-boss" class="additional-input"
+               th:field="*{customAllPart.optimizeStat.boss}">
       </div>
 
-      <div class="optimize">
-        분야 : &nbsp; <br/>
-        주스탯 : &nbsp;
-      </div>
-      <div class="optimize">
-        공 1 &nbsp; <br/>
-        <input type="text" id="optimize-attack" th:field="*{optimizeStat.attack}">
-      </div>
-      <div class="optimize">
-        부스텟 1 &nbsp; <br/>
-        <input type="text" id="optimize-sub" th:field="*{optimizeStat.sub}">
-      </div>
-      <div class="optimize">
-        주스탯 1% &nbsp; <br/>
-        <input type="text" id="optimize-mainPer" th:field="*{optimizeStat.mainPer}">
-      </div>
-      <div class="optimize">
-        부스탯 1% &nbsp; <br/>
-        <input type="text" id="optimize-subPer" th:field="*{optimizeStat.subPer}">
-      </div>
-      <div class="optimize">
-        올스탯 1% &nbsp; <br/>
-        <input type="text" id="optimize-allPer" th:field="*{optimizeStat.allPer}">
-      </div>
-      <div class="optimize">
-        크뎀 1% &nbsp; <br/>
-        <input type="text" id="optimize-critical" th:field="*{optimizeStat.critical}">
-      </div>
-      <div class="optimize">
-        보공 1% &nbsp; <br/>
-        <input type="text" id="optimize-boss" th:field="*{optimizeStat.boss}">
+      <div class="input-group">
+        <button type="submit" class="search-button" name="calculate" th:value="reset">초기화</button>
       </div>
 
     </div>
@@ -526,9 +578,9 @@
 
     <div class="side_banner">
       <ins class="kakao_ad_area" style="display:none;"
-           data-ad-unit = "DAN-XcBwpEkEr4mAlwLX"
-           data-ad-width = "160"
-           data-ad-height = "600"></ins>
+           data-ad-unit="DAN-XcBwpEkEr4mAlwLX"
+           data-ad-width="160"
+           data-ad-height="600"></ins>
       <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
@@ -544,12 +596,14 @@
             <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
             <div class="input-container">
               <label for="equip-main-1">주스탯 : </label>
-              <input type="text" id="equip-main-1" th:field="*{item1.equipInformation.main}" min="0"
+              <input type="text" id="equip-main-1" th:field="*{item1.equipInformation.main}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
               <label for="equip-sub-1">부스탯 : </label>
-              <input type="text" id="equip-sub-1" th:field="*{item1.equipInformation.sub}" min="0"
+              <input type="text" id="equip-sub-1" th:field="*{item1.equipInformation.sub}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
@@ -577,12 +631,14 @@
             </div>
             <div class="input-container">
               <label for="change-sub-1">부스탯 : </label>
-              <input type="text" id="change-sub-1" th:field="*{item1.changeInformation.sub}" min="0"
+              <input type="text" id="change-sub-1" th:field="*{item1.changeInformation.sub}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
               <label for="change-attack-1">공격력 / 마력 : </label>
-              <input type="text" id="change-attack-1" th:field="*{item1.changeInformation.attack}"
+              <input type="text" id="change-attack-1"
+                     th:field="*{item1.changeInformation.attack}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
@@ -620,12 +676,14 @@
             </div>
             <div class="input-container">
               <label for="potential-main-1">주스탯 : </label>
-              <input type="text" id="potential-main-1" th:field="*{item1.potentialInformation.main}"
+              <input type="text" id="potential-main-1"
+                     th:field="*{item1.potentialInformation.main}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
               <label for="potential-sub-1">부스탯 : </label>
-              <input type="text" id="potential-sub-1" th:field="*{item1.potentialInformation.sub}"
+              <input type="text" id="potential-sub-1"
+                     th:field="*{item1.potentialInformation.sub}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
@@ -684,17 +742,30 @@
           <!-- 다섯 번째 작은 상자 -->
           <div class="small-box">
             <!-- 입력 상자 -->
-            <div class="input-container">
+            <div class="input-container" style="margin-top: 25px">
               <label for="price-1">구매가격:</label>
               <input type="text" id="price-1" th:field="*{item1.price.price}" min="0"
                      max="999999999999">
             </div>
             <!-- 다른 입력 상자들도 추가할 수 있음 -->
           </div>
+
+
+          <div class="small-box-last" style="border: none">
+            <div class="double-box">
+              <div class="double-box-inner">
+
+                <button
+                    style="background-color: transparent; border: 2px solid #FFDAB9; color: #ffa07a;"
+                    class="double-button" name="calculate" th:value="3">
+                  가져가기
+                </button>
+                <button class="double-button" name="calculate" th:value="1">계산하기</button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <button class="submit-button" name="calculate" th:value="1">계산하기
-        </button>
       </div>
 
 
@@ -708,12 +779,14 @@
             <h3>장비 옵션 (기본,작,추옵,스타포스 포함)</h3>
             <div class="input-container">
               <label for="equip-main-2">주스탯 : </label>
-              <input type="text" id="equip-main-2" th:field="*{item2.equipInformation.main}" min="0"
+              <input type="text" id="equip-main-2" th:field="*{item2.equipInformation.main}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
               <label for="equip-sub-2">부스탯 : </label>
-              <input type="text" id="equip-sub-2" th:field="*{item2.equipInformation.sub}" min="0"
+              <input type="text" id="equip-sub-2" th:field="*{item2.equipInformation.sub}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
@@ -741,12 +814,14 @@
             </div>
             <div class="input-container">
               <label for="change-sub-2">부스탯 : </label>
-              <input type="text" id="change-sub-2" th:field="*{item2.changeInformation.sub}" min="0"
+              <input type="text" id="change-sub-2" th:field="*{item2.changeInformation.sub}"
+                     min="0"
                      max="9999">
             </div>
             <div class="input-container">
               <label for="change-attack-2">공격력 / 마력 : </label>
-              <input type="text" id="change-attack-2" th:field="*{item2.changeInformation.attack}"
+              <input type="text" id="change-attack-2"
+                     th:field="*{item2.changeInformation.attack}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
@@ -784,12 +859,14 @@
             </div>
             <div class="input-container">
               <label for="potential-main-2">주스탯 : </label>
-              <input type="text" id="potential-main-2" th:field="*{item2.potentialInformation.main}"
+              <input type="text" id="potential-main-2"
+                     th:field="*{item2.potentialInformation.main}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
               <label for="potential-sub-2">부스탯 : </label>
-              <input type="text" id="potential-sub-2" th:field="*{item2.potentialInformation.sub}"
+              <input type="text" id="potential-sub-2"
+                     th:field="*{item2.potentialInformation.sub}"
                      min="0" max="9999">
             </div>
             <div class="input-container">
@@ -848,25 +925,37 @@
           <!-- 다섯 번째 작은 상자 -->
           <div class="small-box-2">
             <!-- 입력 상자 -->
-            <div class="input-container">
+            <div class="input-container" style="margin-top: 25px">
               <label for="price-2">구매가격:</label>
               <input type="text" id="price-2" th:field="*{item2.price.price}" min="0"
                      max="999999999999">
             </div>
             <!-- 다른 입력 상자들도 추가할 수 있음 -->
           </div>
+
+          <div class="small-box-2-last">
+            <div class="double-box">
+              <div class="double-box-inner">
+                <button class="double-button"
+                        style="background-color:transparent; border: 2px solid white; color: #ffa07a;"
+                        name="calculate" th:value="4">
+                  가져가기
+                </button>
+                <button class="double-button" name="calculate" th:value="2">계산하기</button>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <button class="submit-button" name="calculate" th:value="2">계산하기
-        </button>
       </div>
     </div>
 
     <div class="side_banner">
       <ins class="kakao_ad_area" style="display:none;"
-           data-ad-unit = "DAN-U9NKOA46zkLZT1Zw"
-           data-ad-width = "160"
-           data-ad-height = "600"></ins>
+           data-ad-unit="DAN-U9NKOA46zkLZT1Zw"
+           data-ad-width="160"
+           data-ad-height="600"></ins>
       <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
     </div>
 
@@ -917,9 +1006,9 @@
 
 <div class="banner-width">
   <ins class="kakao_ad_area" style="display:none;"
-       data-ad-unit = "DAN-iQowpVhEzfPl5pBd"
-       data-ad-width = "320"
-       data-ad-height = "100"></ins>
+       data-ad-unit="DAN-iQowpVhEzfPl5pBd"
+       data-ad-width="320"
+       data-ad-height="100"></ins>
   <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
 

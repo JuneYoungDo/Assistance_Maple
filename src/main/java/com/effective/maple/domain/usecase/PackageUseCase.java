@@ -1,6 +1,6 @@
 package com.effective.maple.domain.usecase;
 
-import com.effective.maple.domain.dto.RequestDto.PackageItem;
+import com.effective.maple.domain.dto.CompareDto.PackageItem;
 
 public interface PackageUseCase {
     String getPackageResult(PackageItem packageItem);

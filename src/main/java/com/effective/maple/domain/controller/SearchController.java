@@ -1,38 +1,51 @@
 package com.effective.maple.domain.controller;
 
-import com.effective.maple.domain.dto.RequestDto.ItemListUpReq;
+import com.effective.maple.domain.dto.CompareDto.ItemInformation;
 import com.effective.maple.domain.usecase.MainUseCase;
 import com.effective.maple.domain.usecase.SearchUseCase;
 import com.effective.maple.global.exception.BaseException;
 import com.effective.maple.global.exception.errorCode.CharacterErrorCode;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequiredArgsConstructor
+@SessionAttributes("itemInformation")
 public class SearchController {
 
     private final MainUseCase mainUseCase;
     private final SearchUseCase searchUseCase;
 
     @GetMapping("/search")
-    public String getSearchPage(Model model) {
-        ItemListUpReq itemListUpReq = new ItemListUpReq();
-        itemListUpReq.setOptimizeStat(mainUseCase.getInitOptimize());
-        model.addAttribute("itemListUp", itemListUpReq);
+    public String getSearchPage(@ModelAttribute("itemInformation") ItemInformation itemInformation,
+        Model model) {
+        if (itemInformation.getCustomAllPart() == null) {
+            itemInformation.setCustomAllPart(mainUseCase.getInitCustomAllPart());
+        }
+        model.addAttribute("itemInformation", itemInformation);
 
         return "searchItem";
     }
 
     @GetMapping("/search/nickname")
-    public String returnSearchPage(ItemListUpReq itemListUpReq, Model model) {
-        model.addAttribute("itemListUp", itemListUpReq);
+    public String returnSearchPage(@RequestParam("status") String status,
+        @ModelAttribute("itemInformation") ItemInformation itemInformation, Model model) {
+        if (status.equals("reset")) {
+            ItemInformation newItemInformation = new ItemInformation();
+            newItemInformation.setCustomAllPart(mainUseCase.getInitCustomAllPart());
+            itemInformation = newItemInformation;
+            model.addAttribute(itemInformation);
+            return "searchItem";
+        }
         try {
-            model.addAttribute("itemInfoList", searchUseCase.getItemListUp(itemListUpReq));
+            model.addAttribute("itemInformation", itemInformation);
+            model.addAttribute("itemInfoList",
+                searchUseCase.getItemListUp(itemInformation));
         } catch (BaseException exception) {
             model.addAttribute("exception", exception);
         } catch (Exception exception) {
