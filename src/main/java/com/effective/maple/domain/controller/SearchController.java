@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +21,11 @@ public class SearchController {
 
     private final MainUseCase mainUseCase;
     private final SearchUseCase searchUseCase;
+
+    @ModelAttribute("itemInformation")
+    public ItemInformation itemInformation() {
+        return new ItemInformation();
+    }
 
     @GetMapping("/search")
     public String getSearchPage(@ModelAttribute("itemInformation") ItemInformation itemInformation,
@@ -34,18 +40,19 @@ public class SearchController {
 
     @GetMapping("/search/nickname")
     public String returnSearchPage(@RequestParam("status") String status,
-        @ModelAttribute("itemInformation") ItemInformation itemInformation, Model model) {
-        if (status.equals("reset")) {
+        @ModelAttribute("itemInformation") ItemInformation itemInformation,
+        SessionStatus sessionStatus, Model model) {
+        if ("reset".equals(status)) {
+            sessionStatus.setComplete(); // 세션 무효화
             ItemInformation newItemInformation = new ItemInformation();
             newItemInformation.setCustomAllPart(mainUseCase.getInitCustomAllPart());
-            itemInformation = newItemInformation;
-            model.addAttribute(itemInformation);
+            model.addAttribute("itemInformation", newItemInformation);
             return "searchItem";
         }
+
         try {
             model.addAttribute("itemInformation", itemInformation);
-            model.addAttribute("itemInfoList",
-                searchUseCase.getItemListUp(itemInformation));
+            model.addAttribute("itemInfoList", searchUseCase.getItemListUp(itemInformation));
         } catch (BaseException exception) {
             model.addAttribute("exception", exception);
         } catch (Exception exception) {
